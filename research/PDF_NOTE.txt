@@ -1,0 +1,21 @@
+PDF Generation Note
+===================
+
+The PDF version of the Personal Model Identity white paper needs to be generated
+from the markdown source file using one of the following tools:
+
+1. pandoc (recommended)
+2. wkhtmltopdf
+3. weasyprint
+
+The markdown source is available at:
+/home/clay/.openclaw/workspace/venture-lab/research/personal-model-identity-whitepaper.md
+
+Or copied to:
+/home/clay/.openclaw/workspace/blueprintlabs-site/research/personal-model-identity-whitepaper.pdf.md
+
+Once generated, rename to:
+personal-model-identity-whitepaper.pdf
+
+The HTML version is live at:
+https://blueprintlabs.live/research/personal-model-identity.html
