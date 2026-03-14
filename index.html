@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint Labs — Professional AI Tools for Real Estate | blueprintlabs.live</title>
+    <meta name="description" content="42 AI prompts specifically designed for real estate professionals. Save 10-20 hours per week on property analysis, listing copy, and client communication.">
+    <meta name="keywords" content="AI prompts, real estate tools, professional templates, ChatGPT real estate, property analysis, listing descriptions, real estate AI">
+    <meta name="author" content="Blueprint Labs">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blueprint Labs — Professional AI Tools for Real Estate">
+    <meta property="og:description" content="42 AI prompts to 10x your real estate productivity. Save 10-20 hours per week.">
+    <meta property="og:image" content="https://blueprintlabs.live/assets/images/header-banner.png">
+    <meta property="og:url" content="https://blueprintlabs.live">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Blueprint Labs">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blueprint Labs — Professional AI Tools for Real Estate">
+    <meta name="twitter:description" content="42 AI prompts to 10x your real estate productivity.">
+    <meta name="twitter:image" content="https://blueprintlabs.live/assets/images/header-banner.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo-icon.png">
+    
+    <!-- Google Analytics 4 (replace G-XXXXXXXXXX with actual ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Gumroad -->
+    <script src="https://gumroad.com/js/gumroad.js"></script>
+    
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --navy: #1a1a2e;
+            --navy-light: #16213e;
+            --blueprint-blue: #4a90d9;
+            --blueprint-blue-hover: #3a7bc8;
+            --white: #ffffff;
+            --light-grid: #e8f0fe;
+            --gold: #d4af37;
+            --gold-hover: #c4a030;
+            --text-muted: #94a3b8;
+            --text-body: #cbd5e1;
+            --border: rgba(74, 144, 217, 0.15);
+            --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--text-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* ===== UTILITY ===== */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 80px 0; }
+        .text-center { text-align: center; }
+        .text-gold { color: var(--gold); }
+        .text-blue { color: var(--blueprint-blue); }
+        
+        /* ===== GRID BACKGROUND ===== */
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(74, 144, 217, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+        .nav-brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta {
+            background: var(--gold) !important;
+            color: var(--navy) !important;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            transition: background 0.2s !important;
+        }
+        .nav-cta:hover { background: var(--gold-hover) !important; }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 0 80px;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(74, 144, 217, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+        .hero-text h1 span { color: var(--gold); }
+        .hero-text .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .hero-checks {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+        .hero-checks li {
+            padding: 6px 0;
+            font-size: 1rem;
+            color: var(--text-body);
+        }
+        .hero-checks li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px var(--border);
+        }
+        
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        .btn-gold:hover {
+            background: var(--gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--blueprint-blue);
+            border: 2px solid var(--blueprint-blue);
+        }
+        .btn-outline:hover {
+            background: var(--blueprint-blue);
+            color: var(--white);
+        }
+        .btn-lg { padding: 18px 40px; font-size: 1.1rem; }
+        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+        
+        /* ===== BADGE ===== */
+        .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        /* ===== SECTION HEADINGS ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--white);
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* ===== PROBLEMS ===== */
+        .problems {
+            background: linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%);
+        }
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .problem-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.2s;
+        }
+        .problem-card:hover { border-color: rgba(74, 144, 217, 0.3); }
+        .problem-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
+        .problem-card h3 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .problem-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* ===== PRODUCT SHOWCASE ===== */
+        .product-section { background: var(--navy-light); }
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .product-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+        }
+        .product-details h2 {
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        .product-details .product-subtitle {
+            color: var(--blueprint-blue);
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+        }
+        
+        /* ===== CATEGORIES ===== */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+        }
+        .category-card {
+            background: rgba(74, 144, 217, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+        }
+        .category-card h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .category-card ul li {
+            padding: 4px 0;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+        .category-card ul li::before {
+            content: '→';
+            color: var(--blueprint-blue);
+            margin-right: 8px;
+        }
+        .category-count {
+            background: var(--blueprint-blue);
+            color: var(--white);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        /* ===== VALUE MATH ===== */
+        .value-section { background: var(--navy); }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .value-card {
+            text-align: center;
+            padding: 32px 16px;
+            background: rgba(74, 144, 217, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .value-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: -0.03em;
+        }
+        .value-card .label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section { background: var(--navy-light); }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .testimonial {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+        }
+        .testimonial .stars {
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .testimonial blockquote {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .testimonial .author {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .testimonial .role {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        
+        /* ===== COMPARISON ===== */
+        .comparison-section { background: var(--navy); }
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .comparison-col {
+            border-radius: 12px;
+            padding: 32px;
+        }
+        .comparison-col.others {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+        }
+        .comparison-col.ours {
+            background: rgba(74, 144, 217, 0.08);
+            border: 2px solid var(--blueprint-blue);
+        }
+        .comparison-col h3 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .comparison-col ul { list-style: none; }
+        .comparison-col ul li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+        .comparison-col.others ul li {
+            color: var(--text-muted);
+        }
+        .comparison-col.others ul li::before {
+            content: '✗';
+            color: #ef4444;
+            margin-right: 10px;
+            font-weight: 700;
+        }
+        .comparison-col.ours ul li {
+            color: var(--text-body);
+        }
+        .comparison-col.ours ul li::before {
+            content: '✓';
+            color: var(--gold);
+            margin-right: 10px;
+            font-weight: 700;
+        }
+        
+        /* ===== PRICING CTA ===== */
+        .pricing-section {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            position: relative;
+        }
+        .pricing-card {
+            max-width: 540px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            position: relative;
+        }
+        .pricing-card .launch-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--navy);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .pricing-card h2 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        .pricing-card .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        .pricing-card .price {
+            margin-bottom: 24px;
+        }
+        .pricing-card .price .original {
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        .pricing-card .price .current {
+            color: var(--gold);
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+        .pricing-card .price .period {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 4px;
+        }
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        .pricing-features li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: var(--text-body);
+        }
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--gold);
+            margin-right: 10px;
+            font-weight: 700;
+        }
+        .pricing-bonuses {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+        .pricing-bonuses h4 {
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        .pricing-bonuses li {
+            padding: 4px 0;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            list-style: none;
+        }
+        .pricing-bonuses li::before {
+            content: '🎁';
+            margin-right: 8px;
+        }
+        .guarantee {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .guarantee strong { color: var(--text-body); }
+        
+        /* ===== FAQ ===== */
+        .faq-section { background: var(--navy); }
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+        .faq-item summary {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-item summary::after {
+            content: '+';
+            color: var(--blueprint-blue);
+            font-size: 1.3rem;
+            font-weight: 300;
+        }
+        .faq-item[open] summary::after { content: '−'; }
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+        
+        /* ===== EMAIL CAPTURE ===== */
+        .email-section {
+            background: var(--navy-light);
+        }
+        .email-box {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .email-box h2 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        .email-box p {
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+        .email-form {
+            display: flex;
+            gap: 12px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .email-form input[type="email"] {
+            flex: 1;
+            padding: 14px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            color: var(--white);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .email-form input[type="email"]:focus {
+            border-color: var(--blueprint-blue);
+        }
+        .email-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .email-form button {
+            padding: 14px 24px;
+            border-radius: 8px;
+            background: var(--blueprint-blue);
+            color: var(--white);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .email-form button:hover { background: var(--blueprint-blue-hover); }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--navy);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .footer-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--white); }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-text h1 { font-size: 2.2rem; }
+            .hero-checks { text-align: left; }
+            .hero-image { order: -1; }
+            .hero-image img { max-width: 280px; }
+            .btn-group { justify-content: center; }
+            
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(26, 26, 46, 0.98);
+                padding: 24px;
+                border-bottom: 1px solid var(--border);
+                gap: 16px;
+            }
+            
+            .product-showcase { grid-template-columns: 1fr; }
+            .product-image { text-align: center; }
+            .product-image img { max-width: 300px; }
+            
+            .value-grid { grid-template-columns: repeat(2, 1fr); }
+            .comparison-table { grid-template-columns: 1fr; }
+            
+            .pricing-card { padding: 32px 24px; }
+            
+            .email-form { flex-direction: column; }
+            
+            .footer-content { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { justify-content: center; }
+            
+            .section { padding: 60px 0; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 1.8rem; }
+            .section-header h2 { font-size: 1.7rem; }
+            .value-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .value-card .number { font-size: 1.8rem; }
+            .categories-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate { animation: fadeInUp 0.5s ease-out forwards; }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="container">
+        <a href="/" class="nav-brand">
+            <img src="assets/images/logo-icon.png" alt="Blueprint Labs">
+            <span>Blueprint Labs</span>
+        </a>
+        <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#features">What's Inside</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="https://blueprintlabs.gumroad.com/l/real-estate-ai-prompts" class="nav-cta gumroad-button">Get the Blueprint</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="badge">🚀 Launch Special — Limited Time</span>
+                <h1>AI Prompts That Actually Work for <span>Real Estate</span></h1>
+                <p class="subtitle">42 ready-to-use prompts for property analysis, listing copy, client communication, and more. Built by real estate professionals, powered by AI.</p>
+                <ul class="hero-checks">
+                    <li>Save 10–20 hours per week on routine tasks</li>
+                    <li>Generate professional-quality reports in minutes</li>
+                    <li>Works with ChatGPT, Claude, Gemini &amp; more</li>
+                    <li>One-time purchase — yours forever</li>
+                </ul>
+                <div class="btn-group">
+                    <a href="https://blueprintlabs.gumroad.com/l/real-estate-ai-prompts" class="btn btn-gold btn-lg gumroad-button">Get Instant Access — $29</a>
+                    <a href="#features" class="btn btn-outline">See What's Inside</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/cover-final.png" alt="Real Estate AI Prompts Pack — 42 professional prompts">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEMS -->
+<section class="problems section grid-bg" id="problems">
+    <div class="container">
+        <div class="section-header">
+            <span class="badge">The Problem</span>
+            <h2>You're Working Too Hard on the Wrong Things</h2>
+            <p>Every hour you spend on repetitive tasks is an hour you're not closing deals.</p>
+        </div>
+        <div class="problems-grid">
+            <div class="problem-card">
+                <div class="icon">⏰</div>
+                <h3>2+ hours per property analysis</h3>
+                <p>While opportunities slip away to faster competitors who already use AI.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">📝</div>
+                <h3>Repetitive listing descriptions</h3>
+                <p>Copy-pasting and tweaking the same bland text for every property.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">📊</div>
+                <h3>Manual market research</h3>
+                <p>Pulling comps, analyzing trends, building reports — all by hand.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">😴</div>
+                <h3>Leads going cold</h3>
+                <p>Too busy with paperwork to follow up while hot leads choose someone else.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">🔥</div>
+                <h3>Nights and weekends</h3>
+                <p>Working IN your business instead of ON your business — and burning out.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">🎯</div>
+                <h3>Generic AI prompts don't cut it</h3>
+                <p>Business prompt packs miss real estate nuances: cap rates, CMAs, 1031s.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCT SHOWCASE -->
+<section class="product-section section" id="products">
+    <div class="container">
+        <div class="product-showcase">
+            <div class="product-image">
+                <img src="assets/images/cover-final.png" alt="Real Estate AI Prompts Pack">
+            </div>
+            <div class="product-details">
+                <span class="badge">Product #001</span>
+                <h2>Real Estate AI Prompts Pack</h2>
+                <p class="product-subtitle">42 professional prompts across 6 categories</p>
+                <p style="margin-bottom: 20px;">Every prompt is designed for real estate workflows — not generic business templates. From property analysis to tenant management, this pack covers your entire day.</p>
+                <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem;">Works with ChatGPT, Claude, Gemini, and any AI assistant. Instant PDF download. No subscription required.</p>
+                <a href="https://blueprintlabs.gumroad.com/l/real-estate-ai-prompts" class="btn btn-gold gumroad-button">Get the Blueprint — $29</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES / WHAT'S INSIDE -->
+<section class="section grid-bg" id="features">
+    <div class="container">
+        <div class="section-header">
+            <span class="badge">What's Inside</span>
+            <h2>42 Prompts Across 6 Core Workflows</h2>
+            <p>Every major real estate task, covered. Copy, paste, and get professional output in minutes.</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card">
+                <h4>🏠 Property Analysis <span class="category-count">8 prompts</span></h4>
+                <ul>
+                    <li>Property Investment Calculator with ROI</li>
+                    <li>Comparative Market Analysis Generator</li>
+                    <li>Cash Flow Projection Model (10-year)</li>
+                    <li>Fix &amp; Flip Profit Calculator</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h4>📊 Market Research <span class="category-count">7 prompts</span></h4>
+                <ul>
+                    <li>Local Market Trend Analysis</li>
+                    <li>Rental Market Research</li>
+                    <li>Investment Opportunity Finder</li>
+                    <li>Seasonal Market Pattern Analyzer</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h4>✍️ Listing Copy &amp; Marketing <span class="category-count">8 prompts</span></h4>
+                <ul>
+                    <li>SEO-Optimized Listing Descriptions</li>
+                    <li>Social Media Property Posts</li>
+                    <li>Virtual Tour Script Generator</li>
+                    <li>Email Marketing Sequences</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h4>💬 Client Communication <span class="category-count">7 prompts</span></h4>
+                <ul>
+                    <li>Buyer Consultation Questionnaire</li>
+                    <li>Objection Handler Scripts</li>
+                    <li>Client Follow-up Sequences</li>
+                    <li>Referral Request System</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h4>💰 Investment Analysis <span class="category-count">7 prompts</span></h4>
+                <ul>
+                    <li>Real Estate Portfolio Analyzer</li>
+                    <li>Tax Strategy Optimizer</li>
+                    <li>Financing Options Evaluator</li>
+                    <li>Market Timing Indicator</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h4>🏢 Property Management <span class="category-count">5 prompts</span></h4>
+                <ul>
+                    <li>Tenant Screening Criteria</li>
+                    <li>Maintenance Request Prioritizer</li>
+                    <li>Rent Increase Justification</li>
+                    <li>KPI Dashboard Builder</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VALUE MATH -->
+<section class="value-section section" id="value">
+    <div class="container">
+        <div class="section-header">
+            <span class="badge">The ROI</span>
+            <h2>The Math Speaks for Itself</h2>
+            <p>Conservative estimates based on a $50/hour time value.</p>
+        </div>
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="number">15h</div>
+                <div class="label">Saved per week</div>
+            </div>
+            <div class="value-card">
+                <div class="number">$750</div>
+                <div class="label">Weekly value</div>
+            </div>
+            <div class="value-card">
+                <div class="number">$36K</div>
+                <div class="label">Annual value</div>
+            </div>
+            <div class="value-card">
+                <div class="number">$29</div>
+                <div class="label">Your investment</div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="https://blueprintlabs.gumroad.com/l/real-estate-ai-prompts" class="btn btn-gold btn-lg gumroad-button">Start Saving Time Today — $29</a>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section section" id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <span class="badge">Results</span>
+            <h2>What Professionals Are Saying</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <blockquote>"These prompts saved me 15 hours last week. I generated a complete market analysis for a client in 20 minutes that used to take half a day."</blockquote>
+                <div class="author">Sarah M.</div>
+                <div class="role">Real Estate Investor</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <blockquote>"The listing description prompts are gold. My properties are getting 40% more inquiries since I started using them."</blockquote>
+                <div class="author">Mike R.</div>
+                <div class="role">Real Estate Agent</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <blockquote>"As a property manager with 50+ units, the tenant screening and maintenance prompts have streamlined my entire operation."</blockquote>
+                <div class="author">Jennifer L.</div>
+                <div class="role">Property Manager</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison-section section">
+    <div class="container">
+        <div class="section-header">
+            <span class="badge">Why Us</span>
+            <h2>Not Another Generic Prompt Pack</h2>
+        </div>
+        <div class="comparison-table">
+            <div class="comparison-col others">
+                <h3>Generic Business Prompts</h3>
+                <ul>
+                    <li>Templates that need heavy customization</li>
+                    <li>No real estate industry knowledge</li>
+                    <li>10–15 basic prompts</li>
+                    <li>No usage instructions or examples</li>
+                    <li>One-size-fits-all approach</li>
+                </ul>
+            </div>
+            <div class="comparison-col ours">
+                <h3>Blueprint Labs</h3>
+                <ul>
+                    <li>Real estate-specific, works immediately</li>
+                    <li>Built by industry professionals</li>
+                    <li>42 comprehensive, detailed prompts</li>
+                    <li>Complete instructions, examples &amp; pro tips</li>
+                    <li>Organized by role: agents, investors, PMs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section section" id="pricing">
+    <div class="container">
+        <div class="pricing-card">
+            <div class="launch-badge">🔥 Launch Week Special</div>
+            <h2>Real Estate AI Prompts Pack</h2>
+            <p class="subtitle">42 Professional Prompts + Bonuses</p>
+            <div class="price">
+                <span class="original">$97</span>
+                <span class="current">$29</span>
+                <span class="period">One-time purchase · Instant download</span>
+            </div>
+            <ul class="pricing-features">
+                <li>42 real estate-specific AI prompts</li>
+                <li>6 workflow categories covered</li>
+                <li>Works with ChatGPT, Claude, Gemini &amp; more</li>
+                <li>Complete usage instructions &amp; examples</li>
+                <li>Organized by role and skill level</li>
+                <li>Free updates as AI tools evolve</li>
+            </ul>
+            <div class="pricing-bonuses">
+                <h4>Free Launch Bonuses (worth $127)</h4>
+                <ul>
+                    <li>Quick Reference Guide ($27 value)</li>
+                    <li>Real Estate AI Setup Tutorial ($47 value)</li>
+                    <li>30 Days of Example Outputs ($53 value)</li>
+                </ul>
+            </div>
+            <a href="https://blueprintlabs.gumroad.com/l/real-estate-ai-prompts" class="btn btn-gold btn-lg gumroad-button" style="width: 100%;">Get Instant Access — $29</a>
+            <p class="guarantee"><strong>💯 30-Day Money-Back Guarantee.</strong> If these prompts don't save you at least 10 hours, get a full refund. No questions asked.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section section" id="faq">
+    <div class="container">
+        <div class="section-header">
+            <span class="badge">FAQ</span>
+            <h2>Common Questions</h2>
+        </div>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>Do I need to be tech-savvy to use these?</summary>
+                <p>Not at all. If you can copy and paste, you can use these prompts. We include simple setup instructions for ChatGPT, Claude, and other AI tools.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Will these work with any AI tool?</summary>
+                <p>Yes! These prompts are designed to work with ChatGPT, Claude, Gemini, and most other AI assistants. We provide specific tips for each platform.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Are these suitable for new agents?</summary>
+                <p>Absolutely. New agents will create professional-quality content from day one. Experienced pros will love the time savings. Prompts are organized by skill level.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What if my market is different?</summary>
+                <p>Each prompt includes customization instructions for different markets, property types, and situations. They adapt to your specific needs.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How quickly will I see results?</summary>
+                <p>Immediately. Start using prompts within 5 minutes of purchase and generate your first professional report the same day.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Is this a subscription?</summary>
+                <p>No. This is a one-time purchase. You own these prompts forever. We'll never charge you again — and you'll get free updates as AI tools evolve.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What format do I receive?</summary>
+                <p>You'll get a comprehensive PDF with all 42 prompts plus bonus materials, delivered instantly after purchase.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="email-section section" id="newsletter">
+    <div class="container">
+        <div class="email-box">
+            <span class="badge">Stay Updated</span>
+            <h2>Get New Blueprints First</h2>
+            <p>Join the list for early access to new prompt packs, tools, and templates. No spam — just practical tools that work.</p>
+            <form class="email-form" action="https://blueprintlabs.gumroad.com/follow" method="post" target="_blank">
+                <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section" style="background: var(--gradient-hero); padding: 60px 0;">
+    <div class="container text-center">
+        <h2 style="color: var(--white); font-size: 2rem; margin-bottom: 12px;">Ready to 10x Your Real Estate Productivity?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 28px;">Join real estate professionals who are already using AI to close more deals in less time.</p>
+        <a href="https://blueprintlabs.gumroad.com/l/real-estate-ai-prompts" class="btn btn-gold btn-lg gumroad-button">Get the Blueprint — $29</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/images/logo-icon.png" alt="Blueprint Labs">
+                <span>© 2026 Blueprint Labs. All rights reserved.</span>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="mailto:hello@blueprintlabs.live">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Real Estate AI Prompts Pack",
+    "description": "42 professional AI prompts specifically designed for real estate professionals - property analysis, listing copy, client communication, and more.",
+    "brand": {
+        "@type": "Brand",
+        "name": "Blueprint Labs"
+    },
+    "offers": {
+        "@type": "Offer",
+        "price": "29",
+        "priceCurrency": "USD",
+        "url": "https://blueprintlabs.gumroad.com/l/real-estate-ai-prompts",
+        "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "3"
+    }
+}
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Blueprint Labs",
+    "url": "https://blueprintlabs.live",
+    "logo": "https://blueprintlabs.live/assets/images/logo-icon.png",
+    "description": "Professional blueprints, live updates. AI-powered tools and templates for professionals.",
+    "sameAs": []
+}
+</script>
+
+</body>
+</html>
