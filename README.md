@@ -1,16 +1,18 @@
 # Blueprint Labs
 
-Professional AI tools and templates for real estate professionals.
+AI-Powered Tools for Real Estate Professionals
 
 **Website**: [blueprintlabs.live](https://blueprintlabs.live)
 
 ## Products
 
-- **Real Estate AI Prompts Pack** — 42 professional prompts for property analysis, listing copy, client communication, and more.
+- **Real Estate AI Prompts Pack** ($29) — 150+ battle-tested AI prompts for listings, marketing, client communication, and deal analysis.
+- **Content Repurposer** ($49) — Turn one piece of content into 10. Automatically repurpose your blog posts, videos, and podcasts into social media content.
+- **Deal Analyzer Pro** ($79) — AI-powered property analysis tool. Calculate ROI, cash flow, and investment potential in seconds.
 
 ## Contact
 
-hello@blueprintlabs.live
+support@blueprintlabs.co
 
 ---
 
