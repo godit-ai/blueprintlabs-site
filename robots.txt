@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blueprintlabs.live/sitemap.xml
+Sitemap: https://blueprintlabs.co/sitemap.xml

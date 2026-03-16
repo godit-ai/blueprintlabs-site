@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Blueprint Labs</title>
+    <meta name="description" content="Research and insights from Blueprint Labs on AI, real estate, prediction markets, and more.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; height: 72px;">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">B</div>
+                <span>Blueprint Labs</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../products/">Products</a></li>
+                <li><a href="index.html" class="active">Research</a></li>
+                <li><a href="../pmi/">PMI</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section style="padding: 140px 0 80px; background: var(--bg-secondary);">
+        <div class="container" style="text-align: center;">
+            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin-bottom: 1rem;">Research & Insights</h1>
+            <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Deep dives into AI, real estate, prediction markets, and the future of technology.</p>
+        </div>
+    </section>
+
+    <!-- Research Categories -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Research Areas</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <a href="personal-model-identity.html" style="text-decoration: none; color: inherit;">
+                    <div class="feature-card" style="height: 100%;">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Personal Model Identity</h3>
+                        <p style="color: var(--text-secondary);">Research on personalized AI systems and the future of human-AI interaction.</p>
+                    </div>
+                </a>
+                
+                <a href="../products/prediction-markets.html" style="text-decoration: none; color: inherit;">
+                    <div class="feature-card" style="height: 100%;">
+                        <div class="feature-icon">📊</div>
+                        <h3>Prediction Markets</h3>
+                        <p style="color: var(--text-secondary);">Analysis of market inefficiencies and quantitative trading strategies.</p>
+                    </div>
+                </a>
+                
+                <div class="feature-card" style="height: 100%;">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Real Estate AI</h3>
+                    <p style="color: var(--text-secondary);">Applying machine learning to property analysis and market prediction.</p>
+                </div>
+                
+                <div class="feature-card" style="height: 100%;">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Prompt Engineering</h3>
+                    <p style="color: var(--text-secondary);">Research into effective prompt design and AI communication patterns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Research -->
+    <section style="padding: 4rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest Research</h2>
+            </div>
+            
+            <div class="insights-grid">
+                <article class="insight-card">
+                    <div class="insight-content">
+                        <div class="insight-meta">
+                            <span class="insight-category">Research</span>
+                            <span>•</span>
+                            <span>Mar 15, 2025</span>
+                        </div>
+                        <h3>The Future of Prompt Compression</h3>
+                        <p>How semantic compression is changing the economics of AI API usage and what it means for developers.</p>
+                        <a href="#" style="color: var(--primary); font-weight: 600;">Read more →</a>
+                    </div>
+                </article>
+                
+                <article class="insight-card">
+                    <div class="insight-content">
+                        <div class="insight-meta">
+                            <span class="insight-category">Analysis</span>
+                            <span>•</span>
+                            <span>Mar 10, 2025</span>
+                        </div>
+                        <h3>Real Estate Market Trends Q1 2025</h3>
+                        <p>Key indicators and predictions for the upcoming quarter based on our deal analysis data.</p>
+                        <a href="#" style="color: var(--primary); font-weight: 600;">Read more →</a>
+                    </div>
+                </article>
+                
+                <article class="insight-card">
+                    <div class="insight-content">
+                        <div class="insight-meta">
+                            <span class="insight-category">Product</span>
+                            <span>•</span>
+                            <span>Mar 5, 2025</span>
+                        </div>
+                        <h3>Introducing PMI: 50% Cost Reduction</h3>
+                        <p>How our latest product helps companies cut AI costs while maintaining quality and reliability.</p>
+                        <a href="#" style="color: var(--primary); font-weight: 600;">Read more →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Whitepaper -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div style="background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.1)); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 3rem; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📄</div>
+                <h2>Personal Model Identity Whitepaper</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">Our foundational research on personalized AI systems, user-controlled models, and the future of human-AI collaboration.</p>
+                <a href="personal-model-identity.html" class="btn btn-primary btn-large">Read the Whitepaper</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+                    <div class="logo-icon">B</div>
+                    <span>Blueprint Labs</span>
+                </a>
+                <p>Building intelligent tools for real estate professionals and AI-powered businesses.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="../pmi/">PMI</a></li>
+                    <li><a href="../products/deal-analyzer.html">Deal Analyzer</a></li>
+                    <li><a href="../products/prediction-markets.html">Prediction Markets</a></li>
+                    <li><a href="../products/prompt-optimizer.html">Prompt Optimizer</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="index.html">Research</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Blueprint Labs. All rights reserved.</p>
+            <p>Made with 💙 for AI builders</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Optimizer Chrome Extension | Blueprint Labs</title>
+    <meta name="description" content="One-click prompt optimization for ChatGPT, Claude, and other AI tools. Get better results with less effort.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        .extension-hero { background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(37,99,235,0.1) 100%); }
+        .browser-mockup { background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
+        .browser-header { background: var(--bg-tertiary); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .browser-address { flex: 1; background: var(--bg-primary); padding: 0.375rem 1rem; border-radius: 4px; font-size: 0.875rem; color: var(--text-secondary); margin: 0 0.5rem; }
+        .extension-popup { position: absolute; top: 60px; right: 20px; width: 320px; background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: var(--radius); box-shadow: var(--shadow-xl); padding: 1rem; z-index: 10; }
+        .step-card { background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; text-align: center; transition: all var(--transition); }
+        .step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .step-number { width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; margin: 0 auto 1rem; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; height: 72px;">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">B</div>
+                <span>Blueprint Labs</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Products</a></li>
+                <li><a href="../research/">Research</a></li>
+                <li><a href="../pmi/">PMI</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="product-page-hero extension-hero">
+        <div class="container">
+            <div class="product-page-grid">
+                <div class="product-page-content">
+                    <span class="badge badge-beta">Free Beta</span>
+                    <h1>Prompt Optimizer</h1>
+                    <p>Chrome extension for one-click prompt optimization. Get better results from ChatGPT, Claude, and other AI tools with less effort.</p>
+                    
+                    <div class="product-highlights">
+                        <span>⚡ One-click optimize</span>
+                        <span>🎯 Better results</span>
+                        <span>🔒 Privacy first</span>
+                        <span>💯 Free during beta</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#install" class="btn btn-primary btn-large">Add to Chrome — Free</a>
+                        <a href="#demo" class="btn btn-secondary btn-large">See Demo</a>
+                    </div>
+                </div>
+                
+                <div class="product-visual" style="position: relative;">
+                    <div class="browser-mockup">
+                        <div class="browser-header">
+                            <div class="browser-dot" style="background: #ef4444;"></div>
+                            <div class="browser-dot" style="background: #f59e0b;"></div>
+                            <div class="browser-dot" style="background: #10b981;"></div>
+                            <div class="browser-address">chat.openai.com</div>
+                        </div>
+                        <div style="padding: 2rem; position: relative; min-height: 300px;">
+                            <div style="max-width: 80%; margin-bottom: 1rem;">
+                                <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: 12px 12px 12px 4px;">
+                                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">explain quantum computing</p>
+                                </div>
+                            </div>
+                            <div style="max-width: 80%; margin-left: auto; margin-bottom: 1rem;">
+                                <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: 12px 12px 4px 12px;">
+                                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">[AI response would appear here]</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Extension Popup -->
+                            <div class="extension-popup">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">B</div>
+                                    <span style="font-weight: 600;">Prompt Optimizer</span>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.25rem;">Original</div>
+                                    <div style="font-size: 0.875rem; color: var(--text-secondary);">explain quantum computing</div>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.25rem;">Optimized ✨</div>
+                                    <div style="font-size: 0.875rem; color: var(--text-primary);">Provide a comprehensive yet accessible explanation of quantum computing principles...</div>
+                                </div>
+                                <button class="btn btn-primary btn-full" style="padding: 0.625rem;">Use Optimized</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="demo" style="padding: 6rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Three simple steps to better AI responses.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Type Your Prompt</h3>
+                    <p style="color: var(--text-secondary);">Write your prompt naturally in ChatGPT, Claude, or any supported AI tool. Don't worry about perfect phrasing.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Click Optimize</h3>
+                    <p style="color: var(--text-secondary);">Click the Blueprint Labs icon or use the keyboard shortcut. Our AI instantly enhances your prompt.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Better Results</h3>
+                    <p style="color: var(--text-secondary);">Send the optimized prompt and receive significantly better, more accurate AI responses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section style="padding: 6rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Features</h2>
+                <p>Everything you need to get the most out of AI tools.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>One-Click Optimization</h3>
+                    <p>Instantly enhance any prompt with a single click. No copying, pasting, or switching tabs required.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Context-Aware</h3>
+                    <p>Our AI understands what you're trying to accomplish and tailors the optimization accordingly.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Your prompts are processed locally or encrypted in transit. We never store your conversations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Custom Templates</h3>
+                    <p>Save your own prompt templates and optimizations for quick access to your favorite styles.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Usage Analytics</h3>
+                    <p>Track how often you optimize, which templates you use most, and your improvement over time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Multi-Platform</h3>
+                    <p>Works with ChatGPT, Claude, Gemini, Perplexity, and any web-based AI tool.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Platforms -->
+    <section style="padding: 6rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Works With</h2>
+                <p>Compatible with all major AI platforms.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                <div class="feature-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">🤖</div>
+                    <h3>ChatGPT</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">OpenAI's conversational AI</p>
+                </div>
+                
+                <div class="feature-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">🧠</div>
+                    <h3>Claude</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">Anthropic's AI assistant</p>
+                </div>
+                
+                <div class="feature-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">✨</div>
+                    <h3>Gemini</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">Google's AI model</p>
+                </div>
+                
+                <div class="feature-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">🔍</div>
+                    <h3>Perplexity</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">AI-powered search</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Optimizations -->
+    <section style="padding: 6rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Example Optimizations</h2>
+                <p>See how we transform your prompts for better results.</p>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- Example 1 -->
+                <div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden;">
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Original Prompt</div>
+                        <p style="margin: 0; color: var(--text-secondary);">write a marketing email</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05));">
+                        <div style="font-size: 0.75rem; color: var(--primary); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600;">Optimized ✨</div>
+                        <p style="margin: 0;">Write a compelling marketing email for [product/service] targeting [target audience]. Include: attention-grabbing subject line, engaging opening hook, 3 key benefits with bullet points, clear call-to-action, and professional sign-off. Tone: [professional/friendly/urgent]. Length: 150-200 words.</p>
+                    </div>
+                </div>
+                
+                <!-- Example 2 -->
+                <div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden;">
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Original Prompt</div>
+                        <p style="margin: 0; color: var(--text-secondary);">help me code a python function</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05));">
+                        <div style="font-size: 0.75rem; color: var(--primary); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600;">Optimized ✨</div>
+                        <p style="margin: 0;">Create a Python function that [describe functionality]. Requirements: handle edge cases, include type hints, add docstring with parameters/returns, include example usage, and follow PEP 8 style guidelines. Optimize for [performance/readability/maintainability].</p>
+                    </div>
+                </div>
+                
+                <!-- Example 3 -->
+                <div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden;">
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Original Prompt</div>
+                        <p style="margin: 0; color: var(--text-secondary);">summarize this article</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05));">
+                        <div style="font-size: 0.75rem; color: var(--primary); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600;">Optimized ✨</div>
+                        <p style="margin: 0;">Provide a comprehensive summary of the following article. Include: main thesis/argument, 3-5 key supporting points, important data/statistics mentioned, author's conclusion, and 2-3 actionable takeaways. Format with clear headings and bullet points for readability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section style="padding: 6rem 0;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1.5rem;">🔒</div>
+                <h2>Privacy First</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">We take your privacy seriously. Here's how we protect your data:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; text-align: left;">
+                    <div style="padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius);">
+                        <h4 style="margin-bottom: 0.5rem;">🔐 Local Processing</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Basic optimizations happen locally in your browser. No data leaves your machine.</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius);">
+                        <h4 style="margin-bottom: 0.5rem;">🚫 No Storage</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">We don't store your prompts or conversations. Ever.</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius);">
+                        <h4 style="margin-bottom: 0.5rem;">🔒 Encrypted Transit</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">When advanced processing is needed, data is encrypted end-to-end.</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius);">
+                        <h4 style="margin-bottom: 0.5rem;">✅ Open Source</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Core extension code is open source. Audit it yourself.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="install" class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to get better AI results?</h2>
+                <p>Install the Prompt Optimizer extension for free. No credit card required.</p>
+                <a href="#" class="btn btn-primary btn-xlarge" style="margin-top: 1.5rem;">
+                    <span>⬇️</span> Add to Chrome — Free
+                </a>
+                <p style="margin-top: 1.5rem; color: var(--text-tertiary); font-size: 0.875rem;">Also available for Firefox and Edge</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="padding: 6rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        Is this extension really free?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! The extension is completely free during our beta period. We're building premium features for power users, but the core optimization functionality will always have a free tier.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        Does it work with AI tools other than ChatGPT?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! The extension works with ChatGPT, Claude (Anthropic), Google Gemini, Perplexity, and any web-based AI tool. We're constantly adding support for new platforms.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        What happens to my prompts?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Basic optimizations happen locally in your browser. For advanced optimizations, prompts are sent to our servers encrypted, processed, and immediately discarded. We never store your prompts or use them for training.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        Can I use my own templates?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! You can save custom templates and prompt styles. The extension will learn your preferences and offer personalized optimizations over time.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        How is this different from PMI?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>PMI is our enterprise API for developers to compress prompts programmatically. The Prompt Optimizer is a browser extension for end users who want better results from AI chat interfaces. They serve different use cases but share our optimization technology.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+                    <div class="logo-icon">B</div>
+                    <span>Blueprint Labs</span>
+                </a>
+                <p>Building intelligent tools for real estate professionals and AI-powered businesses.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="../pmi/">PMI</a></li>
+                    <li><a href="deal-analyzer.html">Deal Analyzer</a></li>
+                    <li><a href="prediction-markets.html">Prediction Markets</a></li>
+                    <li><a href="prompt-optimizer.html">Prompt Optimizer</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="../research/">Research</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">GitHub</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Blueprint Labs. All rights reserved.</p>
+            <p>Made with 💙 for AI builders</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

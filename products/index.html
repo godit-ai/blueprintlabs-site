@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Blueprint Labs</title>
+    <meta name="description" content="Explore Blueprint Labs products: PMI AI Cost Optimizer, Real Estate Deal Analyzer, Prediction Market Research, and Prompt Optimizer Chrome Extension.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; height: 72px;">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">B</div>
+                <span>Blueprint Labs</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Products</a></li>
+                <li><a href="../research/">Research</a></li>
+                <li><a href="../pmi/">PMI</a></li>
+                <li><a href="../index.html#newsletter">Updates</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section style="padding: 140px 0 80px; background: var(--bg-secondary);">
+        <div class="container" style="text-align: center;">
+            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin-bottom: 1rem;">Our Products</h1>
+            <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Tools designed to give you an edge in real estate, AI operations, and market analysis.</p>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                <!-- PMI -->
+                <div class="product-card featured" style="grid-column: span 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div class="product-icon">🚀</div>
+                        <span class="badge badge-live">Live</span>
+                    </div>
+                    <h3>PMI</h3>
+                    <p style="font-size: 1.125rem; color: var(--text-secondary);">AI Cost Optimizer</p>
+                    <p style="color: var(--text-tertiary); margin: 1rem 0;">Compress prompts by 40-60% while maintaining 95%+ quality. The fastest way to slash your AI API costs.</p>
+                    
+                    <ul class="product-features" style="margin: 1.5rem 0;">
+                        <li><strong>49.8%</strong> average compression</li>
+                        <li><strong>1.43ms</strong> processing time</li>
+                        <li><strong>96.5%</strong> quality retention</li>
+                        <li>Works with all major AI providers</li>
+                        <li>Free tier available</li>
+                    </ul>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: auto;">
+                        <a href="../pmi/" class="btn btn-primary" style="flex: 1;">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Real Estate Deal Analyzer -->
+                <div class="product-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div class="product-icon">🏠</div>
+                        <span class="badge badge-available">Available</span>
+                    </div>
+                    <h3>Deal Analyzer Pro</h3>
+                    <p style="font-size: 1.125rem; color: var(--text-secondary);">Real Estate Deal Analysis</p>
+                    <p style="color: var(--text-tertiary); margin: 1rem 0;">AI-powered property analysis that calculates ROI, cash flow, and investment potential in seconds.</p>
+                    
+                    <ul class="product-features" style="margin: 1.5rem 0;">
+                        <li>Instant ROI calculations</li>
+                        <li>Cash flow projections</li>
+                        <li>Investment scoring</li>
+                        <li>Market analysis tools</li>
+                        <li>30-day money-back guarantee</li>
+                    </ul>
+                    
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
+                        <span style="font-size: 2rem; font-weight: 800;">$79</span>
+                        <span style="color: var(--text-tertiary);">one-time</span>
+                    </div>
+                    
+                    <a href="deal-analyzer.html" class="btn btn-primary btn-full">Learn More</a>
+                </div>
+                
+                <!-- Prediction Market Research -->
+                <div class="product-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div class="product-icon">📊</div>
+                        <span class="badge badge-research">Research</span>
+                    </div>
+                    <h3>Prediction Markets</h3>
+                    <p style="font-size: 1.125rem; color: var(--text-secondary);">Trading Edge Detection</p>
+                    <p style="color: var(--text-tertiary); margin: 1rem 0;">Advanced research into prediction market inefficiencies. Identify trading edges before the crowd.</p>
+                    
+                    <ul class="product-features" style="margin: 1.5rem 0;">
+                        <li>Sentiment analysis algorithms</li>
+                        <li>Market inefficiency detection</li>
+                        <li>Real-time alert systems</li>
+                        <li>Strategy backtesting</li>
+                        <li>Research reports</li>
+                    </ul>
+                    
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
+                        <span style="font-size: 1.25rem; font-weight: 600; color: var(--secondary);">Coming Soon</span>
+                    </div>
+                    
+                    <a href="prediction-markets.html" class="btn btn-ghost btn-full">View Research</a>
+                </div>
+                
+                <!-- Prompt Optimizer Chrome Extension -->
+                <div class="product-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div class="product-icon">🧩</div>
+                        <span class="badge badge-beta">Beta</span>
+                    </div>
+                    <h3>Prompt Optimizer</h3>
+                    <p style="font-size: 1.125rem; color: var(--text-secondary);">Chrome Extension</p>
+                    <p style="color: var(--text-tertiary); margin: 1rem 0;">One-click prompt optimization for ChatGPT, Claude, and other AI tools. Right in your browser.</p>
+                    
+                    <ul class="product-features" style="margin: 1.5rem 0;">
+                        <li>One-click optimization</li>
+                        <li>Works with ChatGPT, Claude</li>
+                        <li>Custom templates</li>
+                        <li>Usage analytics</li>
+                        <li>Free during beta</li>
+                    </ul>
+                    
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--success);">Free</span>
+                        <span style="color: var(--text-tertiary);">during beta</span>
+                    </div>
+                    
+                    <a href="prompt-optimizer.html" class="btn btn-ghost btn-full">Get Extension</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section style="padding: 4rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Compare Products</h2>
+                <p>Find the right tool for your needs.</p>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg-elevated); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-color);">
+                    <thead>
+                        <tr style="background: var(--bg-tertiary);">
+                            <th style="padding: 1rem; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border-color);">Feature</th>
+                            <th style="padding: 1rem; text-align: center; font-weight: 600; border-bottom: 1px solid var(--border-color);">PMI</th>
+                            <th style="padding: 1rem; text-align: center; font-weight: 600; border-bottom: 1px solid var(--border-color);">Deal Analyzer</th>
+                            <th style="padding: 1rem; text-align: center; font-weight: 600; border-bottom: 1px solid var(--border-color);">Prediction Markets</th>
+                            <th style="padding: 1rem; text-align: center; font-weight: 600; border-bottom: 1px solid var(--border-color);">Prompt Optimizer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Status</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);"><span class="badge badge-live">Live</span></td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);"><span class="badge badge-available">Available</span></td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);"><span class="badge badge-research">Research</span></td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);"><span class="badge badge-beta">Beta</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Pricing</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">From $0/mo</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">$79 one-time</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">TBD</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">Free (beta)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Best For</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">AI Developers</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">Real Estate Investors</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">Traders</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border-color);">AI Power Users</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem;">Support</td>
+                            <td style="padding: 1rem; text-align: center;">Email + Chat</td>
+                            <td style="padding: 1rem; text-align: center;">Email</td>
+                            <td style="padding: 1rem; text-align: center;">Community</td>
+                            <td style="padding: 1rem; text-align: center;">GitHub Issues</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Not sure which product is right for you?</h2>
+                <p>Get in touch and we'll help you find the perfect solution for your needs.</p>
+                <a href="mailto:support@blueprintlabs.co" class="btn btn-primary btn-large">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+                    <div class="logo-icon">B</div>
+                    <span>Blueprint Labs</span>
+                </a>
+                <p>Building intelligent tools for real estate professionals and AI-powered businesses.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="../pmi/">PMI</a></li>
+                    <li><a href="deal-analyzer.html">Deal Analyzer</a></li>
+                    <li><a href="prediction-markets.html">Prediction Markets</a></li>
+                    <li><a href="prompt-optimizer.html">Prompt Optimizer</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="../research/">Research</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Blueprint Labs. All rights reserved.</p>
+            <p>Made with 💙 for AI builders</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

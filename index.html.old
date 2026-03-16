@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint Labs - AI Tools for Real Estate Professionals</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script src="scripts/analytics.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Blueprint Labs</a>
+            <ul class="nav-links">
+                <li><a href="products/real-estate-prompts.html">Prompts Pack</a></li>
+                <li><a href="products/content-repurposer.html">Content Tool</a></li>
+                <li><a href="products/deal-analyzer.html">Deal Analyzer</a></li>
+                <li><a href="research/personal-model-identity.html">Research</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI-Powered Tools for Real Estate Professionals</h1>
+                <p class="hero-subtitle">Close more deals, create better content, and analyze properties faster with purpose-built AI tools designed for agents, investors, and property managers.</p>
+                <div class="hero-cta">
+                    <a href="#products" class="btn btn-primary">View Products</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="product-grid">
+                <!-- Real Estate Prompts Pack -->
+                <div class="product-card featured">
+                    <div class="product-badge">Bestseller</div>
+                    <h3>Real Estate AI Prompts Pack</h3>
+                    <p class="product-description">150+ battle-tested AI prompts for listings, marketing, client communication, and deal analysis.</p>
+                    <ul class="product-features">
+                        <li>Property descriptions that sell</li>
+                        <li>Email templates for every situation</li>
+                        <li>Market analysis prompts</li>
+                        <li>Social media content generators</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price">$29</span>
+                        <span class="price-note">One-time purchase</span>
+                    </div>
+                    <a href="mailto:sales@blueprintlabs.com?subject=Purchase Inquiry" class="btn btn-primary btn-full" data-product="real-estate-prompts" data-price="29">Contact to Purchase</a>
+                    <a href="products/real-estate-prompts.html" class="btn btn-text">Learn more →</a>
+                </div>
+
+                <!-- Content Repurposer -->
+                <div class="product-card">
+                    <h3>Content Repurposer</h3>
+                    <p class="product-description">Turn one piece of content into 10. Automatically repurpose your blog posts, videos, and podcasts into social media content.</p>
+                    <ul class="product-features">
+                        <li>Auto-generate social posts</li>
+                        <li>Create email newsletters</li>
+                        <li>Multi-platform optimization</li>
+                        <li>Content calendar scheduling</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price">$49</span>
+                        <span class="price-note">One-time purchase</span>
+                    </div>
+                    <a href="products/content-repurposer.html" class="btn btn-secondary btn-full">Learn More</a>
+                </div>
+
+                <!-- Deal Analyzer -->
+                <div class="product-card">
+                    <h3>Deal Analyzer Pro</h3>
+                    <p class="product-description">AI-powered property analysis tool. Calculate ROI, cash flow, and investment potential in seconds.</p>
+                    <ul class="product-features">
+                        <li>Instant ROI calculations</li>
+                        <li>Cash flow projections</li>
+                        <li>Comparative market analysis</li>
+                        <li>Investment scoring</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price">$79</span>
+                        <span class="price-note">One-time purchase</span>
+                    </div>
+                    <a href="products/deal-analyzer.html" class="btn btn-secondary btn-full">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Why Real Estate Pros Choose Blueprint Labs</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Save Hours Every Week</h3>
+                    <p>Automate repetitive tasks and focus on what matters: closing deals and building relationships.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Purpose-Built for Real Estate</h3>
+                    <p>Generic AI tools don't understand your business. Our prompts and tools are designed specifically for real estate workflows.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📈</div>
+                    <h3>Proven Results</h3>
+                    <p>Join hundreds of agents and investors who are closing more deals with less effort using our tools.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>One-Time Purchase</h3>
+                    <p>No subscriptions, no recurring fees. Buy once, use forever. Free updates included.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"The prompts pack alone saved me 5+ hours in my first week. My listing descriptions are now converting 40% better."</p>
+                    <div class="testimonial-author">
+                        <strong>Sarah M.</strong>
+                        <span>Real Estate Agent, Denver</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"I was skeptical about AI tools, but the Deal Analyzer helped me identify a property I would have passed on. Made $15K on that deal."</p>
+                    <div class="testimonial-author">
+                        <strong>Michael R.</strong>
+                        <span>Property Investor, Phoenix</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Finally, AI tools that actually understand real estate. The content repurposer keeps my social media active without me doing the work."</p>
+                    <div class="testimonial-author">
+                        <strong>Jennifer K.</strong>
+                        <span>Broker, Austin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What exactly do I get with the Real Estate AI Prompts Pack?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You get 150+ carefully crafted AI prompts organized by category: property descriptions, email templates, market analysis, social media content, client communication, and more. Each prompt includes instructions on how to use it and what AI tools work best with it.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do I need to know how to use AI tools?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No experience required! Our prompts work with ChatGPT, Claude, and other popular AI tools. We include a quick-start guide that shows you exactly how to use each prompt, even if you've never used AI before.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is this a subscription or one-time purchase?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All Blueprint Labs products are one-time purchases with no recurring fees. Buy once, use forever. We also include free updates when we add new prompts or features.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What if I'm not satisfied?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day money-back guarantee. If you're not completely satisfied with your purchase, just email us and we'll refund your money, no questions asked.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I access my purchase?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>After purchase, you'll be redirected to an instant download page. You'll also receive an email with your download link. The prompts pack is delivered as a PDF and includes copy-paste ready text.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Real Estate Business?</h2>
+            <p>Join hundreds of agents and investors using AI to close more deals with less effort.</p>
+            <a href="#products" class="btn btn-primary btn-large">Get Started Today</a>
+            <p class="cta-note">30-day money-back guarantee • Instant delivery • Free updates</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Blueprint Labs</a>
+                    <p>AI tools built for real estate professionals.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="products/real-estate-prompts.html">AI Prompts Pack</a></li>
+                        <li><a href="products/content-repurposer.html">Content Repurposer</a></li>
+                        <li><a href="products/deal-analyzer.html">Deal Analyzer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="mailto:support@blueprintlabs.co">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Blueprint Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked if wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
