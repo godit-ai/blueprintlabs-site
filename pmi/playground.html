@@ -306,18 +306,84 @@
             }, 800);
         }
 
+        // Real PMI Compression Algorithm
+        const STOP_WORDS = new Set(['a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they']);
+        
+        const ABBREVIATIONS = {
+            'please': '', 'thanks': 'thx', 'thank you': 'ty', 'information': 'info',
+            'application': 'app', 'approximately': '~', 'example': 'ex', 'versus': 'vs',
+            'artificial intelligence': 'AI', 'machine learning': 'ML'
+        };
+        
+        const REDUNDANT_PATTERNS = [
+            { pattern: /\bin order to\b/gi, replacement: 'to' },
+            { pattern: /\bdue to the fact that\b/gi, replacement: 'because' },
+            { pattern: /\bin the event that\b/gi, replacement: 'if' },
+            { pattern: /\bat this point in time\b/gi, replacement: 'now' },
+            { pattern: /\bfor the purpose of\b/gi, replacement: 'for' },
+            { pattern: /\bit is important to note that\b/gi, replacement: '' },
+            { pattern: /\bit should be noted that\b/gi, replacement: '' },
+            { pattern: /\bneedless to say\b/gi, replacement: '' },
+            { pattern: /\bto be honest\b/gi, replacement: '' },
+            { pattern: /\bat the end of the day\b/gi, replacement: 'ultimately' },
+            { pattern: /\bI would like to\b/gi, replacement: '' },
+            { pattern: /\bI need you to\b/gi, replacement: '' },
+            { pattern: /\bCan you please\b/gi, replacement: '' },
+            { pattern: /\bCould you please\b/gi, replacement: '' }
+        ];
+        
         function simulateCompression(text) {
-            // Simple compression simulation
-            return text
-                .replace(/\b(I need you to|Can you please|I want to|I would like to)\b/gi, '')
-                .replace(/\b(and|also|additionally)\b/gi, ',')
-                .replace(/\b(please|kindly)\b/gi, '')
-                .replace(/\s+/g, ' ')
-                .replace(/\b(analyze|review|examine)\b/gi, 'analyze')
-                .replace(/\b(comprehensive|detailed|thorough)\b/gi, '')
-                .replace(/\b(specific|particular|exact)\b/gi, '')
-                .replace(/\s+/g, ' ')
-                .trim();
+            let result = text;
+            
+            // Step 1: Remove redundant phrases
+            REDUNDANT_PATTERNS.forEach(({ pattern, replacement }) => {
+                result = result.replace(pattern, replacement);
+            });
+            
+            // Step 2: Apply abbreviations
+            Object.entries(ABBREVIATIONS).forEach(([full, abbr]) => {
+                result = result.replace(new RegExp('\\b' + full + '\\b', 'gi'), abbr);
+            });
+            
+            // Step 3: Remove filler words at start
+            result = result.replace(/^(I need|I want|Can you|Could you|Please|Kindly)\s+/gi, '');
+            
+            // Step 4: Simplify common phrases
+            result = result
+                .replace(/\bprovide me with\b/gi, 'give me')
+                .replace(/\bgive me a\b/gi, 'give')
+                .replace(/\bmake sure to\b/gi, '')
+                .replace(/\btry to\b/gi, '')
+                .replace(/\battempt to\b/gi, '')
+                .replace(/\bmanage to\b/gi, '')
+                .replace(/\bsucceed in\b/gi, '')
+                .replace(/\bcomprehensive\b/gi, '')
+                .replace(/\bdetailed\b/gi, '')
+                .replace(/\bthorough\b/gi, '')
+                .replace(/\bspecific\b/gi, '')
+                .replace(/\bparticular\b/gi, '')
+                .replace(/\bexact\b/gi, '')
+                .replace(/\bprecise\b/gi, '');
+            
+            // Step 5: Remove articles where safe
+            result = result
+                .replace(/\bthe\s+/gi, ' ')
+                .replace(/\ba\s+/gi, ' ')
+                .replace(/\ban\s+/gi, ' ');
+            
+            // Step 6: Normalize whitespace
+            result = result.replace(/\s+/g, ' ').trim();
+            
+            // Step 7: Shorten sentences (remove "and" between clauses)
+            result = result.replace(/,\s*and\s+/gi, ', ');
+            
+            // Step 8: Convert to imperative where possible
+            result = result
+                .replace(/\bI would like\b/gi, '')
+                .replace(/\bI want\b/gi, '')
+                .replace(/\bI need\b/gi, '');
+            
+            return result.trim();
         }
 
         function clearAll() {
