@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | PMI - Blueprint Labs</title>
+    <meta name="description" content="Manage your PMI API keys, view usage analytics, and monitor your AI cost savings.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-light: #3b82f6;
+            --secondary: #0ea5e9; --accent: #06b6d4; --text: #1e293b; --text-light: #64748b;
+            --bg: #ffffff; --bg-light: #f8fafc; --bg-dark: #f1f5f9; --border: #e2e8f0;
+            --success: #22c55e; --warning: #f59e0b;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg-light); }
+        
+        header { background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-link { text-decoration: none; color: var(--text-light); font-weight: 500; }
+        .nav-link:hover { color: var(--primary); }
+        .user-menu { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background 0.2s; }
+        .user-menu:hover { background: var(--bg-light); }
+        .user-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; }
+        
+        .dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .dashboard-header { margin-bottom: 2rem; }
+        .dashboard-header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .dashboard-header p { color: var(--text-light); }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .stat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .stat-label { font-size: 0.875rem; color: var(--text-light); }
+        .stat-badge { padding: 0.25rem 0.75rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+        .stat-badge.success { background: rgba(34,197,94,0.1); color: var(--success); }
+        .stat-badge.warning { background: rgba(245,158,11,0.1); color: var(--warning); }
+        .stat-value { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
+        .stat-change { font-size: 0.875rem; color: var(--text-light); }
+        .stat-change.positive { color: var(--success); }
+        
+        .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+        .panel { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .panel-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .panel-header h3 { font-size: 1rem; font-weight: 600; }
+        .panel-body { padding: 1.5rem; }
+        
+        .api-key-section { margin-bottom: 1.5rem; }
+        .api-key-section:last-child { margin-bottom: 0; }
+        .api-key-label { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .api-key-box { display: flex; gap: 0.5rem; }
+        .api-key-input { flex: 1; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-family: monospace; font-size: 0.875rem; background: var(--bg-light); }
+        .btn { padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-secondary { background: var(--bg-light); color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-sm { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
+        
+        .usage-chart { height: 200px; background: var(--bg-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-light); }
+        
+        .plan-card { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
+        .plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .plan-name { font-size: 1.25rem; font-weight: 700; }
+        .plan-badge { background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 100px; font-size: 0.75rem; }
+        .plan-features { list-style: none; margin-bottom: 1.5rem; }
+        .plan-features li { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.875rem; }
+        .plan-features li::before { content: '✓'; }
+        
+        .activity-list { list-style: none; }
+        .activity-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-icon { width: 40px; height: 40px; background: var(--bg-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+        .activity-content { flex: 1; }
+        .activity-title { font-weight: 500; margin-bottom: 0.25rem; }
+        .activity-time { font-size: 0.875rem; color: var(--text-light); }
+        
+        .quick-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .action-card { padding: 1.5rem; border: 1px solid var(--border); border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.2s; text-decoration: none; color: var(--text); }
+        .action-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(37,99,235,0.1); }
+        .action-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .action-title { font-weight: 600; margin-bottom: 0.25rem; }
+        .action-desc { font-size: 0.875rem; color: var(--text-light); }
+        
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .quick-actions { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo"><div class="logo-icon">PM</div>Blueprint Labs</a>
+            <div class="nav-right">
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="playground.html" class="nav-link">Playground</a>
+                <div class="user-menu" onclick="toggleUserMenu()">
+                    <div class="user-avatar">CJ</div>
+                    <span>Clayton</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <p>Manage your API keys, monitor usage, and track your savings.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">API Calls This Month</span>
+                    <span class="stat-badge success">On Track</span>
+                </div>
+                <div class="stat-value">8,432</div>
+                <div class="stat-change">of 10,000 free limit</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">Avg Compression</span>
+                    <span class="stat-badge success">Excellent</span>
+                </div>
+                <div class="stat-value">49.8%</div>
+                <div class="stat-change positive">↑ 2.3% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">Tokens Saved</span>
+                </div>
+                <div class="stat-value">1.2M</div>
+                <div class="stat-change">This month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">Est. Savings</span>
+                </div>
+                <div class="stat-value">$384</div>
+                <div class="stat-change">This month</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <div class="panel" style="margin-bottom: 1.5rem;">
+                    <div class="panel-header">
+                        <h3>API Keys</h3>
+                        <button class="btn btn-secondary btn-sm" onclick="generateNewKey()">+ New Key</button>
+                    </div>
+                    <div class="panel-body">
+                        <div class="api-key-section">
+                            <div class="api-key-label">Production Key</div>
+                            <div class="api-key-box">
+                                <input type="password" class="api-key-input" value="pmi_live_abc123xyz789" readonly id="prod-key">
+                                <button class="btn btn-secondary" onclick="toggleKey('prod-key')">Show</button>
+                                <button class="btn btn-secondary" onclick="copyKey('prod-key')">Copy</button>
+                            </div>
+                        </div>
+                        <div class="api-key-section">
+                            <div class="api-key-label">Test Key</div>
+                            <div class="api-key-box">
+                                <input type="password" class="api-key-input" value="pmi_test_def456uvw012" readonly id="test-key">
+                                <button class="btn btn-secondary" onclick="toggleKey('test-key')">Show</button>
+                                <button class="btn btn-secondary" onclick="copyKey('test-key')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Usage Analytics</h3>
+                        <select class="btn btn-secondary btn-sm">
+                            <option>Last 30 days</option>
+                            <option>Last 7 days</option>
+                            <option>This month</option>
+                        </select>
+                    </div>
+                    <div class="panel-body">
+                        <div class="usage-chart">
+                            📊 Usage chart visualization
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <span class="plan-name">Free Plan</span>
+                        <span class="plan-badge">Current</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>10,000 requests/month</li>
+                        <li>Standard compression</li>
+                        <li>Basic analytics</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="upgradePlan()">Upgrade to Pro</button>
+                </div>
+
+                <div class="panel" style="margin-bottom: 1.5rem;">
+                    <div class="panel-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <div class="activity-icon">⚡</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">API key generated</div>
+                                    <div class="activity-time">2 hours ago</div>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <div class="activity-icon">📊</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Monthly report ready</div>
+                                    <div class="activity-time">1 day ago</div>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <div class="activity-icon">🔑</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Account created</div>
+                                    <div class="activity-time">3 days ago</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <a href="docs.html" class="action-card">
+                        <div class="action-icon">📚</div>
+                        <div class="action-title">View Docs</div>
+                        <div class="action-desc">Integration guides</div>
+                    </a>
+                    <a href="playground.html" class="action-card">
+                        <div class="action-icon">🧪</div>
+                        <div class="action-title">Playground</div>
+                        <div class="action-desc">Test compression</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleKey(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+            event.target.textContent = input.type === 'password' ? 'Show' : 'Hide';
+        }
+        
+        function copyKey(id) {
+            const input = document.getElementById(id);
+            navigator.clipboard.writeText(input.value);
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+        
+        function generateNewKey() {
+            alert('New API key generation - Coming soon!');
+        }
+        
+        function upgradePlan() {
+            alert('Redirecting to upgrade page...');
+        }
+        
+        function toggleUserMenu() {
+            // User dropdown menu
+            const options = ['Profile', 'Settings', 'Billing', 'Sign Out'];
+            const choice = prompt('Menu options: ' + options.join(', '));
+            if (choice === 'Sign Out') {
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

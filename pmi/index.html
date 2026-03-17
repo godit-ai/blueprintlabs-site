@@ -120,10 +120,10 @@
             <a href="#" class="logo"><div class="logo-icon">PM</div>Blueprint Labs</a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#demo">Demo</a></li>
+                <li><a href="playground.html">Demo</a></li>
                 <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#" class="nav-cta">Get API Key</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="signup.html" class="nav-cta">Get API Key</a></li>
             </ul>
             <button class="mobile-menu-btn">☰</button>
         </nav>
@@ -134,8 +134,8 @@
         <h1>Cut AI Costs by <span>50%</span> with Intelligent Prompt Compression</h1>
         <p class="hero-subtitle">PMI compresses AI prompts by 40-60% while maintaining 95%+ quality. Process requests in just 1.43ms and slash your API bills instantly.</p>
         <div class="hero-ctas">
-            <a href="#demo" class="btn btn-primary">Try Demo →</a>
-            <a href="#" class="btn btn-secondary">Get API Key</a>
+            <a href="playground.html" class="btn btn-primary">Try Demo →</a>
+            <a href="signup.html" class="btn btn-secondary">Get API Key</a>
         </div>
     </section>
 
@@ -239,7 +239,7 @@
                     <li>JavaScript & Python SDK</li>
                     <li>Basic analytics</li>
                 </ul>
-                <a href="#" class="btn btn-secondary">Get Started</a>
+                <a href="signup.html" class="btn btn-secondary">Get Started</a>
             </div>
             <div class="pricing-card popular">
                 <div class="popular-badge">Most Popular</div>
@@ -254,7 +254,7 @@
                     <li>Advanced analytics dashboard</li>
                     <li>Custom compression rules</li>
                 </ul>
-                <a href="#" class="btn btn-primary">Start Free Trial</a>
+                <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
             </div>
             <div class="pricing-card">
                 <h3>Enterprise</h3>
@@ -269,7 +269,7 @@
                     <li>Custom model training</li>
                     <li>On-premise deployment</li>
                 </ul>
-                <a href="#" class="btn btn-secondary">Contact Sales</a>
+                <a href="mailto:sales@blueprintlabs.live" class="btn btn-secondary">Contact Sales</a>
             </div>
         </div>
     </section>
@@ -317,7 +317,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#">API Documentation</a></li>
-                    <li><a href="#">SDKs</a></li>
+                    <li><a href="docs.html">SDKs</a></li>
                     <li><a href="#">Changelog</a></li>
                 </ul>
             </div>
@@ -333,8 +333,8 @@
             <div class="footer-links">
                 <h4>Legal</h4>
                 <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
                     <li><a href="#">Security</a></li>
                     <li><a href="#">Status</a></li>
                 </ul>
@@ -353,6 +353,26 @@
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = '';
+                navLinks.style.cssText = '';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '1rem';
+                navLinks.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1)';
+                navLinks.style.zIndex = '1000';
+            }
+        }
 
         // FAQ accordion
         document.querySelectorAll('.faq-question').forEach(q => {
