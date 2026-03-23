@@ -102,6 +102,164 @@ const OBJECT_TYPES = {
     extract(match, sentence) {
       return {
         topic: match[1].trim(),
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  // Additional object types for broader coverage
+  task: {
+    label: 'Task',
+    patterns: [
+      /(?:todo|task|action item|follow up|follow-up):?\s*([^.!?\n]{5,120})/gi,
+      /(?:need to|should|must|have to)\s+([^.!?\n]{5,120})/gi,
+      /(?:assigned|delegated)\s+(?:to\s+)?([^.!?\n]{5,120})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        task: match[1].trim(),
+        assignee: extractNames(sentence)[0] || null,
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  question: {
+    label: 'Question',
+    patterns: [
+      /\b(what|how|why|when|where|who|can|could|would|will)\s+([^?]{5,150}\?)/gi,
+      /(?:question|q):?\s*([^.!?\n]{5,150})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        question: (match[1] + ' ' + match[2]).trim(),
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  code_snippet: {
+    label: 'Code',
+    patterns: [
+      /```[\s\S]*?```/g,
+      /`[^`]+`/g,
+      /(?:error|exception|bug|issue):?\s*([^.!?\n]{10,200})/gi,
+      /(?:function|method|class|api|endpoint)\s+([^.!?\n]{5,100})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        code: match[0],
+        type: match[0].startsWith('```') ? 'block' : 'inline',
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  metric: {
+    label: 'Metric',
+    patterns: [
+      /(\d+(?:\.\d+)?)\s*(%|percent|percentage)/gi,
+      /(\$[\d,]+(?:\.\d{2})?)/g,
+      /(\d+(?:,\d{3})*)\s*(users|customers|revenue|sales|conversions|clicks|views)/gi,
+      /(?:kpi|metric|measurement|benchmark):?\s*([^.!?\n]{5,80})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        value: match[1],
+        unit: match[2] || 'count',
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  requirement: {
+    label: 'Requirement',
+    patterns: [
+      /(?:requirement|spec|specification|must|shall|need to support):?\s*([^.!?\n]{10,150})/gi,
+      /(?:should|must|needs to)\s+(?:support|handle|work with|be compatible with|integrate with)\s+([^.!?\n]{10,100})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        requirement: match[1].trim(),
+        priority: sentence.includes('must') || sentence.includes('shall') ? 'high' : 'medium',
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  risk: {
+    label: 'Risk',
+    patterns: [
+      /(?:risk|concern|warning|caution|watch out|be careful):?\s*([^.!?\n]{10,150})/gi,
+      /(?:might|could|may)\s+(?:delay|fail|break|cause|impact|affect)\s+([^.!?\n]{10,150})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        risk: match[1].trim(),
+        severity: sentence.includes('critical') || sentence.includes('blocker') ? 'high' : 'medium',
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  opportunity: {
+    label: 'Opportunity',
+    patterns: [
+      /(?:opportunity|upside|potential|could|might be able to)\s+(?:expand|grow|increase|improve|enter|launch)\s+([^.!?\n]{10,150})/gi,
+      /(?:consider|explore|look into)\s+([^.!?\n]{10,100})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        opportunity: match[1].trim(),
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  file_reference: {
+    label: 'File',
+    patterns: [
+      /([\w\-]+\.(pdf|doc|docx|txt|csv|xlsx|json|js|ts|py|md|html|css))/gi,
+      /(?:see|check|review|attached|in)\s+(?:the\s+)?(?:file|document|doc|spreadsheet)?\s*:?\s*([^.!?\n]{5,80})/gi
+    ],
+    extract(match, sentence) {
+      return {
+        filename: match[1] || match[0],
+        type: match[2] || 'unknown',
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  },
+
+  location: {
+    label: 'Location',
+    patterns: [
+      /(?:in|at|from|to)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*(?:,\s*[A-Z]{2})?)/g,
+      /(?:office|location|site|branch|hq|headquarters)\s+(?:in|at)?\s*:?\s*([^.!?\n]{3,50})/gi
+    ],
+    extract(match, sentence) {
+      const commonFalsePositives = ['The', 'This', 'That', 'Next', 'Last', 'First'];
+      if (commonFalsePositives.includes(match[1])) return null;
+      return {
+        location: match[1].trim(),
+        context: sentence.trim(),
+        rawMatch: match[0]
+      };
+    }
+  }
+    ],
+    extract(match, sentence) {
+      return {
+        topic: match[1].trim(),
         context: sentence.trim()
       };
     }
