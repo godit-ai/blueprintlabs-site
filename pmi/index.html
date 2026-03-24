@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leanference - Object-Based Memory Hierarchy for LLM Systems | Cut AI Costs by 50%</title>
-    <meta name="description" content="Leanference provides an object-based memory hierarchy for LLM systems. Reduce AI costs by 40-60% with 96.5% quality retention and 1.43ms processing time.">
+    <title>Leanference - Cut AI Costs by 50% | Blueprint Labs</title>
+    <meta name="description" content="Leanference reduces AI API costs by 40-60% with 96.5% quality retention and 1.43ms processing time. Works with OpenAI, Anthropic, Google, and more.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -82,9 +82,9 @@
         .pricing-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
         .pricing-card .description { color: var(--text-light); font-size: 0.875rem; margin-bottom: 1.5rem; }
         .price { margin-bottom: 2rem; } .price .amount { font-size: 3rem; font-weight: 800; } .price .period { color: var(--text-light); }
-        .features-list { list-style: none; margin-bottom: 2rem; }
-        .features-list li { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; color: var(--text-light); }
-        .features-list li::before { content: '\2713'; color: #22c55e; font-weight: 700; }
+        .price-features { list-style: none; margin-bottom: 2rem; }
+        .price-features li { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; color: var(--text-light); }
+        .price-features li::before { content: '\2713'; color: #22c55e; font-weight: 700; }
         .pricing-card .btn { width: 100%; justify-content: center; }
         .faq { padding: 6rem 2rem; background: var(--bg-light); }
         .faq-container { max-width: 800px; margin: 0 auto; } .faq-list { margin-top: 3rem; }
@@ -120,10 +120,9 @@
             <a href="#" class="logo"><div class="logo-icon">LF</div>Blueprint Labs</a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="playground.html">Demo</a></li>
+                <li><a href="#demo">Demo</a></li>
                 <li><a href="#pricing">Pricing</a></li>
-                <li><a href="docs.html">Docs</a></li>
-                <li><a href="signup.html" class="nav-cta">Get API Key</a></li>
+                <li><a href="signup.html" class="nav-cta">Get Started</a></li>
             </ul>
             <button class="mobile-menu-btn">&#9776;</button>
         </nav>
@@ -131,11 +130,11 @@
 
     <section class="hero">
         <div class="hero-badge"><span>&#x1F680;</span> Now compatible with GPT-4, Claude, and Gemini</div>
-        <h1>Cut AI Costs by <span>50%</span> with Object-Based Memory Hierarchy</h1>
-        <p class="hero-subtitle">Leanference is an object-based memory hierarchy for LLM systems. Reduce token usage by 40-60% with 96.5% quality retention through exact-prefix caching, object memory, and working-set management&#x2014;all in 1.43ms.</p>
+        <h1>Cut Your AI Costs by <span>50%</span> Without Sacrificing Quality</h1>
+        <p class="hero-subtitle">Leanference intelligently optimizes your LLM requests to reduce token usage by 40-60%, while maintaining 96.5% output quality. Processing takes just 1.43ms.</p>
         <div class="hero-ctas">
-            <a href="playground.html" class="btn btn-primary">Try Demo &#x2192;</a>
-            <a href="signup.html" class="btn btn-secondary">Get API Key</a>
+            <a href="signup.html" class="btn btn-primary">Start Free &#x2192;</a>
+            <a href="#demo" class="btn btn-secondary">See It in Action</a>
         </div>
     </section>
 
@@ -159,39 +158,39 @@
 
     <section class="features" id="features">
         <div class="section-header">
-            <h2>Six Layers of Intelligent Context Management</h2>
-            <p>Leanference implements a complete memory hierarchy for LLM systems&#x2014;from exact caching to lossy compression with fidelity guarantees.</p>
+            <h2>Why Teams Choose Leanference</h2>
+            <p>Everything you need to reduce AI costs at scale, with zero changes to your existing workflows.</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">&#x26A1;</div>
-                <h3>Exact-Prefix Caching</h3>
-                <p>Reuse stable system prompts and instruction blocks across requests. Identical prefixes are cached and served instantly, eliminating redundant token processing.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">&#x1F9E0;</div>
-                <h3>Object Memory</h3>
-                <p>Store addressable facts as structured objects instead of repeated prose. Reference knowledge by ID rather than re-injecting full paragraphs into every prompt.</p>
+                <div class="feature-icon">&#x1F4B0;</div>
+                <h3>Cut Costs by 40-60%</h3>
+                <p>Reduce your monthly AI API bill dramatically. If you spend $1,000/month on tokens, expect to pay $400-600 instead. Savings start from your first API call.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#x1F3AF;</div>
-                <h3>Working-Set Management</h3>
-                <p>Keep only hot state in the context window. Automatically evict stale context and promote frequently accessed objects to minimize token waste.</p>
+                <h3>96.5% Quality Guaranteed</h3>
+                <p>Every optimization comes with a quality guarantee. Your outputs remain virtually identical to unoptimized requests, backed by measurable quality scores.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">&#x1F50D;</div>
-                <h3>Semantic Reuse</h3>
-                <p>Approximate query matching finds previously compressed results for similar prompts. Near-duplicate requests get instant responses without reprocessing.</p>
+                <div class="feature-icon">&#x26A1;</div>
+                <h3>1.43ms Processing</h3>
+                <p>Optimization happens in under 2 milliseconds. Your users will never notice any added latency. Faster than a network round trip.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">&#x1F4DC;</div>
-                <h3>Lossy Compression with Fidelity Contracts</h3>
-                <p>Intelligently compress context with measurable quality bounds. Every compression operation comes with a fidelity contract guaranteeing 96.5%+ quality retention.</p>
+                <div class="feature-icon">&#x1F50C;</div>
+                <h3>Drop-In Integration</h3>
+                <p>Add Leanference to your existing codebase in under 5 minutes. One-line SDK for Python, JavaScript, Ruby, and Go. No architecture changes required.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#x1F6E1;&#xFE0F;</div>
-                <h3>Full-Context Fallback</h3>
-                <p>When compression risks exceed fidelity thresholds, Leanference automatically falls back to full context. Zero risk of quality degradation on critical requests.</p>
+                <h3>Zero Risk</h3>
+                <p>Automatic fallback to full context when optimization would reduce quality below your threshold. Your critical requests are always protected.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#x1F4CA;</div>
+                <h3>Real-Time Analytics</h3>
+                <p>Track your savings, quality scores, and usage patterns with a comprehensive analytics dashboard. Know exactly how much you are saving every day.</p>
             </div>
         </div>
     </section>
@@ -199,8 +198,8 @@
     <section class="demo" id="demo">
         <div class="demo-container">
             <div class="section-header">
-                <h2>See the Memory Hierarchy in Action</h2>
-                <p>Watch Leanference apply object memory and working-set management to transform verbose prompts into compact, efficient context&#x2014;while preserving all critical information.</p>
+                <h2>See the Results</h2>
+                <p>Watch Leanference optimize a real prompt, cutting tokens nearly in half while preserving all critical information.</p>
             </div>
             <div class="demo-window">
                 <div class="demo-header">
@@ -235,34 +234,34 @@
     <section class="pricing" id="pricing">
         <div class="section-header">
             <h2>Simple, Transparent Pricing</h2>
-            <p>Start free, scale as you grow. All plans include the full memory hierarchy.</p>
+            <p>Start free, scale as you grow. No hidden fees.</p>
         </div>
         <div class="pricing-grid">
             <div class="pricing-card">
-                <h3>Free</h3>
-                <p class="description">Perfect for side projects and experimentation</p>
+                <h3>Starter</h3>
+                <p class="description">Perfect for side projects and testing</p>
                 <div class="price"><span class="amount">$0</span><span class="period">/month</span></div>
-                <ul class="features-list">
+                <ul class="price-features">
                     <li>1,000 requests/month</li>
-                    <li>Standard compression (up to 40%)</li>
+                    <li>Basic optimization</li>
                     <li>Community support</li>
-                    <li>JavaScript & Python SDK</li>
+                    <li>JavaScript &amp; Python SDK</li>
                     <li>Basic analytics</li>
                 </ul>
-                <a href="signup.html" class="btn btn-secondary">Get Started</a>
+                <a href="signup.html" class="btn btn-secondary">Get Started Free</a>
             </div>
             <div class="pricing-card popular">
                 <div class="popular-badge">Most Popular</div>
                 <h3>Pro</h3>
                 <p class="description">For growing startups and production apps</p>
                 <div class="price"><span class="amount">$49</span><span class="period">/month</span></div>
-                <ul class="features-list">
+                <ul class="price-features">
                     <li>50,000 requests/month</li>
-                    <li>Full memory hierarchy (up to 60%)</li>
+                    <li>Full optimization engine</li>
                     <li>Priority email support</li>
                     <li>All SDKs + REST API</li>
                     <li>Advanced analytics dashboard</li>
-                    <li>Custom compression rules</li>
+                    <li>Custom optimization rules</li>
                 </ul>
                 <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
             </div>
@@ -270,14 +269,14 @@
                 <h3>Enterprise</h3>
                 <p class="description">For teams that need maximum performance</p>
                 <div class="price"><span class="amount">Custom</span></div>
-                <ul class="features-list">
+                <ul class="price-features">
                     <li>Unlimited requests</li>
-                    <li>Maximum compression (60%+)</li>
+                    <li>Maximum optimization</li>
                     <li>24/7 dedicated support</li>
-                    <li>SSO & advanced security</li>
-                    <li>SLA with 100% uptime</li>
-                    <li>Custom model training</li>
-                    <li>On-premise deployment</li>
+                    <li>SSO &amp; advanced security</li>
+                    <li>99.99% uptime SLA</li>
+                    <li>On-premise deployment option</li>
+                    <li>Dedicated account manager</li>
                 </ul>
                 <a href="mailto:sales@blueprintlabs.live" class="btn btn-secondary">Contact Sales</a>
             </div>
@@ -288,28 +287,28 @@
         <div class="faq-container">
             <div class="section-header">
                 <h2>Frequently Asked Questions</h2>
-                <p>Everything you need to know about Leanference and how it can reduce your AI costs.</p>
+                <p>Everything you need to know about Leanference.</p>
             </div>
             <div class="faq-list">
                 <div class="faq-item">
-                    <div class="faq-question">How does Leanference maintain quality while reducing token usage?</div>
-                    <div class="faq-answer">Leanference uses a multi-layer memory hierarchy rather than naive compression. Exact-prefix caching reuses stable prompts with zero quality loss. Object memory replaces repeated prose with addressable facts. Working-set management evicts stale context. For lossy compression, every operation includes a fidelity contract guaranteeing 96.5%+ quality retention&#x2014;and if the risk exceeds the threshold, we fall back to full context automatically.</div>
+                    <div class="faq-question">How does Leanference maintain quality while reducing costs?</div>
+                    <div class="faq-answer">Every optimization includes a quality score. If the quality would drop below your configured threshold, Leanference automatically falls back to the full request. This means you get cost savings when it is safe, and full quality when it matters most. Our average quality retention is 96.5% across all requests.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Which AI providers does Leanference work with?</div>
-                    <div class="faq-answer">Leanference works seamlessly with all major AI providers including OpenAI (GPT-4, GPT-3.5), Anthropic (Claude), Google (Gemini, PaLM), Cohere, and any OpenAI-compatible API. Our universal integration means you can use Leanference with your existing codebase without changing providers.</div>
+                    <div class="faq-answer">Leanference works with all major AI providers including OpenAI (GPT-4, GPT-3.5), Anthropic (Claude), Google (Gemini, PaLM), Cohere, and any OpenAI-compatible API. Our universal SDK means you can use Leanference with your existing codebase without changing providers.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">How much can I actually save on API costs?</div>
-                    <div class="faq-answer">Most customers see 40-60% reduction in token usage, which translates directly to API cost savings. For example, if you're spending $1,000/month on OpenAI API calls, Leanference typically reduces that to $400-600. Savings come from multiple layers: prefix caching eliminates redundant system prompts, object memory removes repeated context, and lossy compression handles the rest&#x2014;all while maintaining 96.5% quality retention.</div>
+                    <div class="faq-answer">Most customers see 40-60% reduction in token usage, which translates directly to API cost savings. For example, if you are spending $1,000/month on OpenAI API calls, Leanference typically reduces that to $400-600 while maintaining the same output quality.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Is my data secure with Leanference?</div>
-                    <div class="faq-answer">Absolutely. Leanference is SOC 2 Type II certified and uses end-to-end encryption for all data in transit and at rest. We never store your prompts or responses on our servers&#x2014;processing happens in memory and is immediately discarded. Enterprise customers can also opt for on-premise deployment for complete data control.</div>
+                    <div class="faq-answer">Absolutely. Leanference is SOC 2 Type II certified and uses end-to-end encryption for all data in transit and at rest. We never store your prompts or responses on our servers. Enterprise customers can also opt for on-premise deployment for complete data control.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">How long does integration take?</div>
-                    <div class="faq-answer">Most developers integrate Leanference in under 5 minutes. Simply install our SDK (npm install leanference-sdk or pip install leanference), add your API key, and wrap your existing prompts with our optimization function. We provide one-line integrations for all major frameworks and extensive documentation to get you started quickly.</div>
+                    <div class="faq-answer">Most developers integrate Leanference in under 5 minutes. Install our SDK, add your API key, and wrap your existing calls with our optimization function. We provide one-line integrations for all major frameworks and comprehensive documentation for subscribers.</div>
                 </div>
             </div>
         </div>
@@ -319,16 +318,14 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo"><div class="logo-icon">LF</div>Blueprint Labs</a>
-                <p>Object-based memory hierarchy for LLM systems. Cut AI costs by 40-60% while maintaining 96.5% quality. Built for developers, trusted by enterprises.</p>
+                <p>Cut AI costs by 40-60% while maintaining 96.5% quality. Built for developers, trusted by enterprises.</p>
             </div>
             <div class="footer-links">
                 <h4>Product</h4>
                 <ul>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#">API Documentation</a></li>
-                    <li><a href="docs.html">SDKs</a></li>
-                    <li><a href="#">Changelog</a></li>
+                    <li><a href="signup.html">Get Started</a></li>
                 </ul>
             </div>
             <div class="footer-links">
@@ -336,8 +333,7 @@
                 <ul>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="mailto:sales@blueprintlabs.live">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-links">
@@ -346,45 +342,21 @@
                     <li><a href="privacy.html">Privacy Policy</a></li>
                     <li><a href="terms.html">Terms of Service</a></li>
                     <li><a href="#">Security</a></li>
-                    <li><a href="#">Status</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&#x00A9; 2024 Blueprint Labs. All rights reserved.</p>
-            <p>Made with &#x1F499; for AI builders everywhere</p>
+            <p>&#x00A9; 2025 Blueprint Labs. All rights reserved.</p>
+            <p>Made for AI builders everywhere</p>
         </div>
     </footer>
 
     <script>
-        // Header scroll effect
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         });
-
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = '';
-                navLinks.style.cssText = '';
-            } else {
-                navLinks.style.display = 'flex';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'white';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.padding = '1rem';
-                navLinks.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1)';
-                navLinks.style.zIndex = '1000';
-            }
-        }
-
-        // FAQ accordion
         document.querySelectorAll('.faq-question').forEach(q => {
             q.addEventListener('click', () => {
                 const item = q.parentElement;

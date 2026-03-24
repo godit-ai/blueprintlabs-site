@@ -3,628 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation | PMI - Blueprint Labs</title>
-    <meta name="description" content="Complete API documentation for PMI prompt compression service. Integrate in minutes with our REST API.">
+    <title>API Documentation | Leanference - Blueprint Labs</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-light: #3b82f6;
-            --secondary: #0ea5e9; --accent: #06b6d4; --text: #1e293b; --text-light: #64748b;
-            --bg: #ffffff; --bg-light: #f8fafc; --bg-dark: #f1f5f9; --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-            --code-bg: #0f172a; --code-text: #e2e8f0;
-        }
-        html { scroll-behavior: smooth; }
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --secondary: #0ea5e9; --text: #1e293b; --text-light: #64748b; --bg: #ffffff; --bg-light: #f8fafc; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); }
         header { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; }
         nav { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
         .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 500; transition: color 0.2s; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 500; }
         .nav-links a:hover { color: var(--primary); }
         .nav-cta { background: var(--primary); color: white !important; padding: 0.5rem 1.25rem; border-radius: 6px; }
-        .nav-cta:hover { background: var(--primary-dark); }
-        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
-        .docs-container { max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 4rem; display: grid; grid-template-columns: 280px 1fr; gap: 3rem; }
-        .sidebar { position: sticky; top: 100px; height: fit-content; }
-        .sidebar h3 { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-light); margin-bottom: 1rem; }
-        .sidebar ul { list-style: none; }
-        .sidebar li { margin-bottom: 0.5rem; }
-        .sidebar a { text-decoration: none; color: var(--text-light); font-size: 0.95rem; display: block; padding: 0.5rem; border-radius: 6px; transition: all 0.2s; }
-        .sidebar a:hover, .sidebar a.active { color: var(--primary); background: var(--bg-light); }
-        .main-content { min-height: 100vh; }
-        .page-header { margin-bottom: 3rem; }
-        .page-header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
-        .page-header p { color: var(--text-light); font-size: 1.125rem; }
-        .section { margin-bottom: 4rem; }
-        .section h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); }
-        .section h3 { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 1rem; }
-        .section p { color: var(--text-light); margin-bottom: 1rem; }
-        .endpoint { background: var(--bg-light); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
-        .endpoint-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .method { background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600; font-family: monospace; }
-        .path { font-family: monospace; font-size: 1rem; color: var(--text); }
-        .code-block { background: var(--code-bg); border-radius: 8px; overflow: hidden; margin: 1.5rem 0; }
-        .code-header { background: #1e293b; padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .code-header span { color: #94a3b8; font-size: 0.875rem; }
-        .copy-btn { background: transparent; border: 1px solid #475569; color: #94a3b8; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
-        .copy-btn:hover { border-color: #94a3b8; color: white; }
-        pre { padding: 1.5rem; overflow-x: auto; margin: 0; }
-        code { font-family: 'Monaco', 'Menlo', 'Consolas', monospace; font-size: 0.875rem; line-height: 1.6; color: var(--code-text); }
-        .code-block code { background: transparent; padding: 0; }
-        .param-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
-        .param-table th, .param-table td { text-align: left; padding: 1rem; border-bottom: 1px solid var(--border); }
-        .param-table th { font-weight: 600; color: var(--text); background: var(--bg-light); }
-        .param-table td { color: var(--text-light); }
-        .param-table code { background: var(--bg-dark); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem; }
-        .required { color: #ef4444; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem; }
-        .optional { color: var(--text-light); font-size: 0.75rem; margin-left: 0.5rem; }
-        .error-card { background: var(--bg-light); border-left: 4px solid #ef4444; padding: 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-        .error-card h4 { color: #ef4444; margin-bottom: 0.5rem; }
-        .error-card p { margin: 0; }
-        .tip-box { background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(14,165,233,0.1)); border-left: 4px solid var(--primary); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
-        .tip-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
-        .tip-box p { margin: 0; color: var(--text); }
-        .language-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); }
-        .language-tab { padding: 0.75rem 1.5rem; background: none; border: none; color: var(--text-light); font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
-        .language-tab:hover { color: var(--primary); }
-        .language-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        footer { background: #0f172a; color: #94a3b8; padding: 4rem 2rem 2rem; margin-top: 4rem; }
-        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 3rem; margin-bottom: 3rem; }
-        .footer-brand .logo { color: white; margin-bottom: 1rem; } .footer-brand p { font-size: 0.875rem; line-height: 1.6; }
-        .footer-links h4 { color: white; font-size: 0.875rem; margin-bottom: 1rem; } .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.5rem; } .footer-links a { color: #94a3b8; text-decoration: none; font-size: 0.875rem; }
-        .footer-links a:hover { color: white; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.875rem; }
-        @media (max-width: 768px) {
-            .nav-links { display: none; } .mobile-menu-btn { display: block; }
-            .docs-container { grid-template-columns: 1fr; padding: 7rem 1.5rem 2rem; }
-            .sidebar { position: relative; top: 0; margin-bottom: 2rem; }
-            .page-header h1 { font-size: 2rem; }
-            .endpoint-header { flex-wrap: wrap; }
-            .footer-grid { grid-template-columns: 1fr; gap: 2rem; } .footer-bottom { flex-direction: column; text-align: center; }
-        }
+        .content { max-width: 700px; margin: 0 auto; padding: 10rem 2rem 6rem; text-align: center; }
+        .lock-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+        .content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .content p { color: var(--text-light); font-size: 1.125rem; margin-bottom: 2rem; line-height: 1.8; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 14px rgba(37,99,235,0.4); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary { background: white; color: var(--text); border: 2px solid var(--border); margin-left: 1rem; }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+        .features-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; text-align: left; }
+        .preview-item { background: var(--bg-light); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .preview-item h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .preview-item p { color: var(--text-light); font-size: 0.875rem; }
+        footer { background: #0f172a; color: #94a3b8; padding: 3rem 2rem; text-align: center; margin-top: 4rem; font-size: 0.875rem; }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html" class="logo"><div class="logo-icon">PM</div>Blueprint Labs</a>
-            <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="playground.html">Playground</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="docs.html" class="active">Docs</a></li>
-                <li><a href="signup.html" class="nav-cta">Get API Key</a></li>
-            </ul>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
-        </nav>
-    </header>
+    <header><nav>
+        <a href="index.html" class="logo"><div class="logo-icon">LF</div>Blueprint Labs</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="signup.html" class="nav-cta">Get Started</a></li>
+        </ul>
+    </nav></header>
 
-    <div class="docs-container">
-        <aside class="sidebar">
-            <h3>Getting Started</h3>
-            <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#authentication">Authentication</a></li>
-                <li><a href="#quickstart">Quick Start</a></li>
-            </ul>
-            <h3>API Reference</h3>
-            <ul>
-                <li><a href="#compress">Compress Prompt</a></li>
-                <li><a href="#batch">Batch Compression</a></li>
-                <li><a href="#health">Health Check</a></li>
-            </ul>
-            <h3>Resources</h3>
-            <ul>
-                <li><a href="#errors">Error Codes</a></li>
-                <li><a href="#rate-limits">Rate Limits</a></li>
-                <li><a href="#sdks">SDKs</a></li>
-            </ul>
-        </aside>
+    <div class="content">
+        <div class="lock-icon">&#x1F512;</div>
+        <h1>Documentation for Subscribers</h1>
+        <p>Full API documentation, SDK guides, integration tutorials, and code examples are available exclusively to registered Leanference users. Sign up for a free account to get instant access.</p>
+        <div>
+            <a href="signup.html" class="btn btn-primary">Sign Up Free</a>
+            <a href="login.html" class="btn btn-secondary">Already have an account? Log in</a>
+        </div>
 
-        <main class="main-content">
-            <div class="page-header">
-                <h1>API Documentation</h1>
-                <p>Integrate PMI's intelligent prompt compression into your applications in minutes. Our REST API is simple, fast, and designed for developers.</p>
+        <div class="features-preview">
+            <div class="preview-item">
+                <h3>REST API Reference</h3>
+                <p>Complete endpoint documentation with request/response examples.</p>
             </div>
-
-            <section class="section" id="overview">
-                <h2>Overview</h2>
-                <p>The PMI API provides a simple way to compress AI prompts while maintaining quality. All API requests are made to <code>https://api.pmi.blueprintlabs.com/v1</code> and require authentication via API key.</p>
-                
-                <div class="tip-box">
-                    <h4>💡 Base URL</h4>
-                    <p>All API requests should be made to: <code>https://api.pmi.blueprintlabs.com/v1</code></p>
-                </div>
-
-                <h3>Key Features</h3>
-                <ul style="margin: 1rem 0; padding-left: 1.5rem; color: var(--text-light);">
-                    <li>Compress prompts by 40-60% while maintaining 95%+ quality</li>
-                    <li>Average response time of 1.43ms</li>
-                    <li>Support for all major AI providers (OpenAI, Anthropic, Google)</li>
-                    <li>Batch processing for high-throughput applications</li>
-                    <li>Real-time quality scoring</li>
-                </ul>
-            </section>
-
-            <section class="section" id="authentication">
-                <h2>Authentication</h2>
-                <p>All API requests require authentication using your API key. Include your key in the <code>X-API-Key</code> header with every request.</p>
-                
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>Header Format</span>
-                    </div>
-                    <pre><code>X-API-Key: your_api_key_here</code></pre>
-                </div>
-
-                <div class="tip-box">
-                    <h4>🔐 Security Best Practices</h4>
-                    <p>Never expose your API key in client-side code or public repositories. Use environment variables or a secrets manager to store your keys securely.</p>
-                </div>
-
-                <h3>Getting Your API Key</h3>
-                <p>1. <a href="signup.html">Create an account</a> or <a href="login.html">log in</a> to your existing account</p>
-                <p>2. Navigate to your <a href="dashboard.html">Dashboard</a></p>
-                <p>3. Copy your API key (or generate a new one)</p>
-            </section>
-
-            <section class="section" id="compress">
-                <h2>Compress Prompt</h2>
-                <p>Compress a single prompt using PMI's intelligent compression algorithms.</p>
-
-                <div class="endpoint">
-                    <div class="endpoint-header">
-                        <span class="method">POST</span>
-                        <span class="path">/compress</span>
-                    </div>
-                    <p>Compresses the provided prompt and returns the compressed version along with metadata.</p>
-                </div>
-
-                <h3>Request Parameters</h3>
-                <table class="param-table">
-                    <thead>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>prompt</code><span class="required">required</span></td>
-                            <td>string</td>
-                            <td>The prompt text to compress. Maximum 10,000 characters.</td>
-                        </tr>
-                        <tr>
-                            <td><code>level</code><span class="optional">optional</span></td>
-                            <td>string</td>
-                            <td>Compression level: <code>low</code>, <code>medium</code> (default), or <code>high</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>preserve_context</code><span class="optional">optional</span></td>
-                            <td>boolean</td>
-                            <td>Whether to preserve semantic context. Default: <code>true</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>target_model</code><span class="optional">optional</span></td>
-                            <td>string</td>
-                            <td>Target AI model: <code>gpt-4</code>, <code>claude</code>, <code>gemini</code>, or <code>generic</code> (default)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Request Example</h3>
-                <div class="language-tabs">
-                    <button class="language-tab active" onclick="switchTab('curl')">cURL</button>
-                    <button class="language-tab" onclick="switchTab('python')">Python</button>
-                    <button class="language-tab" onclick="switchTab('javascript')">JavaScript</button>
-                </div>
-
-                <div id="curl" class="tab-content active">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>curl</span>
-                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        </div>
-                        <pre><code>curl -X POST https://api.pmi.blueprintlabs.com/v1/compress \\
-  -H "Content-Type: application/json" \\
-  -H "X-API-Key: your_api_key_here" \\
-  -d '{
-    "prompt": "Please analyze this quarterly sales report and provide a comprehensive breakdown of performance metrics including revenue figures, quarter-over-quarter comparisons, and actionable recommendations.",
-    "level": "medium",
-    "target_model": "gpt-4"
-  }'</code></pre>
-                    </div>
-                </div>
-
-                <div id="python" class="tab-content">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Python</span>
-                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        </div>
-                        <pre><code>import requests
-
-api_key = "your_api_key_here"
-url = "https://api.pmi.blueprintlabs.com/v1/compress"
-
-payload = {
-    "prompt": "Please analyze this quarterly sales report and provide a comprehensive breakdown of performance metrics including revenue figures, quarter-over-quarter comparisons, and actionable recommendations.",
-    "level": "medium",
-    "target_model": "gpt-4"
-}
-
-headers = {
-    "Content-Type": "application/json",
-    "X-API-Key": api_key
-}
-
-response = requests.post(url, json=payload, headers=headers)
-data = response.json()
-
-print(f"Compressed: {data['compressed_prompt']}")
-print(f"Tokens saved: {data['tokens_saved']}")
-print(f"Quality score: {data['quality_score']}")</code></pre>
-                    </div>
-                </div>
-
-                <div id="javascript" class="tab-content">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>JavaScript</span>
-                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        </div>
-                        <pre><code>const apiKey = 'your_api_key_here';
-const url = 'https://api.pmi.blueprintlabs.com/v1/compress';
-
-const payload = {
-  prompt: 'Please analyze this quarterly sales report and provide a comprehensive breakdown of performance metrics including revenue figures, quarter-over-quarter comparisons, and actionable recommendations.',
-  level: 'medium',
-  target_model: 'gpt-4'
-};
-
-fetch(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'X-API-Key': apiKey
-  },
-  body: JSON.stringify(payload)
-})
-.then(response => response.json())
-.then(data => {
-  console.log('Compressed:', data.compressed_prompt);
-  console.log('Tokens saved:', data.tokens_saved);
-  console.log('Quality score:', data.quality_score);
-})
-.catch(error => console.error('Error:', error));</code></pre>
-                    </div>
-                </div>
-
-                <h3>Response</h3>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>200 OK - application/json</span>
-                    </div>
-                    <pre><code>{
-  "success": true,
-  "data": {
-    "original_prompt": "Please analyze this quarterly sales report...",
-    "compressed_prompt": "Analyze Q sales report: rev figs, QoQ compare, trends, actionable recs",
-    "original_tokens": 87,
-    "compressed_tokens": 46,
-    "tokens_saved": 41,
-    "compression_ratio": 0.471,
-    "quality_score": 0.972,
-    "processing_time_ms": 1.43,
-    "estimated_savings_usd": 0.0012
-  }
-}</code></pre>
-                </div>
-
-                <h3>Response Fields</h3>
-                <table class="param-table">
-                    <thead>
-                        <tr>
-                            <th>Field</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>success</code></td>
-                            <td>boolean</td>
-                            <td>Whether the compression was successful</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.original_prompt</code></td>
-                            <td>string</td>
-                            <td>The original prompt text</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.compressed_prompt</code></td>
-                            <td>string</td>
-                            <td>The compressed prompt text</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.original_tokens</code></td>
-                            <td>integer</td>
-                            <td>Token count of original prompt</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.compressed_tokens</code></td>
-                            <td>integer</td>
-                            <td>Token count of compressed prompt</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.tokens_saved</code></td>
-                            <td>integer</td>
-                            <td>Number of tokens saved</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.compression_ratio</code></td>
-                            <td>float</td>
-                            <td>Percentage of tokens reduced (0.0-1.0)</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.quality_score</code></td>
-                            <td>float</td>
-                            <td>Estimated quality retention (0.0-1.0)</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.processing_time_ms</code></td>
-                            <td>float</td>
-                            <td>Time taken to process in milliseconds</td>
-                        </tr>
-                        <tr>
-                            <td><code>data.estimated_savings_usd</code></td>
-                            <td>float</td>
-                            <td>Estimated cost savings per request (USD)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section class="section" id="batch">
-                <h2>Batch Compression</h2>
-                <p>Compress multiple prompts in a single request for improved throughput.</p>
-
-                <div class="endpoint">
-                    <div class="endpoint-header">
-                        <span class="method">POST</span>
-                        <span class="path">/compress/batch</span>
-                    </div>
-                    <p>Compress up to 100 prompts in a single batch request.</p>
-                </div>
-
-                <h3>Request Body</h3>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>JSON</span>
-                    </div>
-                    <pre><code>{
-  "prompts": [
-    {
-      "id": "req_001",
-      "prompt": "First prompt to compress...",
-      "level": "medium"
-    },
-    {
-      "id": "req_002", 
-      "prompt": "Second prompt to compress...",
-      "level": "high"
-    }
-  ],
-  "target_model": "gpt-4"
-}</code></pre>
-                </div>
-
-                <div class="tip-box">
-                    <h4>💡 Batch Processing Benefits</h4>
-                    <p>Batch requests have higher rate limits and reduced per-request overhead. Ideal for processing large datasets or high-throughput applications.</p>
-                </div>
-            </section>
-
-            <section class="section" id="health">
-                <h2>Health Check</h2>
-                <p>Check the API status and your account quota.</p>
-
-                <div class="endpoint">
-                    <div class="endpoint-header">
-                        <span class="method">GET</span>
-                        <span class="path">/health</span>
-                    </div>
-                    <p>Returns API status and account information.</p>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>Response</span>
-                    </div>
-                    <pre><code>{
-  "status": "healthy",
-  "version": "1.2.0",
-  "quota": {
-    "used": 15234,
-    "limit": 50000,
-    "resets_at": "2024-02-01T00:00:00Z"
-  }
-}</code></pre>
-                </div>
-            </section>
-
-            <section class="section" id="errors">
-                <h2>Error Codes</h2>
-                <p>PMI uses standard HTTP response codes to indicate the success or failure of API requests.</p>
-
-                <div class="error-card">
-                    <h4>400 Bad Request</h4>
-                    <p>The request was malformed or missing required parameters. Check the error message for details.</p>
-                </div>
-
-                <div class="error-card">
-                    <h4>401 Unauthorized</h4>
-                    <p>Invalid or missing API key. Verify your API key is included in the X-API-Key header.</p>
-                </div>
-
-                <div class="error-card">
-                    <h4>429 Too Many Requests</h4>
-                    <p>You've exceeded your rate limit. Wait before retrying or upgrade your plan for higher limits.</p>
-                </div>
-
-                <div class="error-card">
-                    <h4>500 Internal Server Error</h4>
-                    <p>Something went wrong on our end. Please try again or contact support if the issue persists.</p>
-                </div>
-
-                <h3>Error Response Format</h3>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>Error JSON</span>
-                    </div>
-                    <pre><code>{
-  "success": false,
-  "error": {
-    "code": "invalid_api_key",
-    "message": "The provided API key is invalid or has been revoked.",
-    "details": null
-  }
-}</code></pre>
-                </div>
-            </section>
-
-            <section class="section" id="rate-limits">
-                <h2>Rate Limits</h2>
-                <p>Rate limits vary by plan. Limits are applied per API key and reset at the start of each billing period.</p>
-
-                <table class="param-table">
-                    <thead>
-                        <tr>
-                            <th>Plan</th>
-                            <th>Requests/Month</th>
-                            <th>Requests/Second</th>
-                            <th>Batch Max</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Free</strong></td>
-                            <td>1,000</td>
-                            <td>2</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pro</strong></td>
-                            <td>50,000</td>
-                            <td>20</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Enterprise</strong></td>
-                            <td>Unlimited</td>
-                            <td>100+</td>
-                            <td>500</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="tip-box">
-                    <h4>📊 Rate Limit Headers</h4>
-                    <p>Every response includes headers showing your current rate limit status:<br>
-                    <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code></p>
-                </div>
-            </section>
-
-            <section class="section" id="sdks">
-                <h2>SDKs</h2>
-                <p>Official SDKs make integration even easier. Install with your preferred package manager:</p>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>Python</span>
-                    </div>
-                    <pre><code>pip install pmi-sdk</code></pre>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>JavaScript / Node.js</span>
-                    </div>
-                    <pre><code>npm install pmi-sdk</code></pre>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>Ruby</span>
-                    </div>
-                    <pre><code>gem install pmi-sdk</code></pre>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>Go</span>
-                    </div>
-                    <pre><code>go get github.com/blueprintlabs/pmi-sdk</code></pre>
-                </div>
-            </section>
-        </main>
+            <div class="preview-item">
+                <h3>SDK Guides</h3>
+                <p>Step-by-step integration for Python, JavaScript, Ruby, and Go.</p>
+            </div>
+            <div class="preview-item">
+                <h3>Code Examples</h3>
+                <p>Production-ready snippets for common use cases and frameworks.</p>
+            </div>
+            <div class="preview-item">
+                <h3>Best Practices</h3>
+                <p>Tips for maximizing cost savings while maintaining quality.</p>
+            </div>
+        </div>
     </div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="index.html" class="logo"><div class="logo-icon">PM</div>Blueprint Labs</a>
-                <p>Intelligent prompt compression that cuts AI costs by 50% while maintaining quality. Built for developers, trusted by enterprises.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="index.html#features">Features</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="docs.html">API Documentation</a></li>
-                    <li><a href="playground.html">Playground</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="#">Security</a></li>
-                    <li><a href="#">Status</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2024 Blueprint Labs. All rights reserved.</p>
-            <p>Made with 💙 for AI builders everywhere</p>
-        </div>
-    </footer>
-
-    <script>
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'white';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.padding = '1rem';
-            navLinks.style.boxShadow = 'var(--shadow-lg)';
+    <footer><p>&copy; 2025 Blueprint Labs. All rights reserved.</p></footer>
+</body>
+</html>

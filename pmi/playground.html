@@ -3,426 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMI Playground | Try Prompt Compression</title>
-    <meta name="description" content="Try PMI's intelligent prompt compression in real-time. See how much you can save on AI API costs instantly.">
+    <title>Leanference Playground | Blueprint Labs</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-light: #3b82f6;
-            --secondary: #0ea5e9; --accent: #06b6d4; --text: #1e293b; --text-light: #64748b;
-            --bg: #ffffff; --bg-light: #f8fafc; --bg-dark: #f1f5f9; --border: #e2e8f0;
-            --success: #22c55e; --warning: #f59e0b;
-        }
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --secondary: #0ea5e9; --text: #1e293b; --text-light: #64748b; --bg: #ffffff; --bg-light: #f8fafc; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); }
         header { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; }
         nav { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
         .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 500; transition: color 0.2s; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 500; }
         .nav-links a:hover { color: var(--primary); }
         .nav-cta { background: var(--primary); color: white !important; padding: 0.5rem 1.25rem; border-radius: 6px; }
-        .nav-cta:hover { background: var(--primary-dark); }
-        
-        .playground-container { max-width: 1200px; margin: 0 auto; padding: 7rem 2rem 4rem; }
-        .playground-header { text-align: center; margin-bottom: 3rem; }
-        .playground-header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .playground-header p { color: var(--text-light); font-size: 1.125rem; }
-        
-        .playground-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        
-        .panel { background: var(--bg-light); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-        .panel-header { background: var(--bg); padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .panel-header h3 { font-size: 1rem; font-weight: 600; }
-        .panel-header .stats { display: flex; gap: 1rem; font-size: 0.875rem; color: var(--text-light); }
-        .panel-header .stats span { display: flex; align-items: center; gap: 0.25rem; }
-        
-        .panel-body { padding: 1.5rem; }
-        textarea { width: 100%; min-height: 300px; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.95rem; resize: vertical; background: var(--bg); }
-        textarea:focus { outline: none; border-color: var(--primary); }
-        .output-area { width: 100%; min-height: 300px; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.95rem; background: var(--bg); white-space: pre-wrap; }
-        
-        .controls { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0; }
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+        .content { max-width: 900px; margin: 0 auto; padding: 8rem 2rem 4rem; text-align: center; }
+        .content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .content > p { color: var(--text-light); font-size: 1.125rem; margin-bottom: 3rem; }
+        .demo-preview { background: #1e293b; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); margin-bottom: 3rem; }
+        .demo-header { background: #0f172a; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .demo-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .demo-dot.red { background: #ef4444; } .demo-dot.yellow { background: #f59e0b; } .demo-dot.green { background: #22c55e; }
+        .demo-body { padding: 2rem; }
+        .demo-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; }
+        .demo-panel { background: #0f172a; border-radius: 8px; padding: 1.5rem; text-align: left; }
+        .demo-panel h4 { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .demo-text { color: #e2e8f0; font-size: 0.875rem; line-height: 1.6; font-family: Monaco, Menlo, monospace; }
+        .demo-arrow { color: #22c55e; font-size: 1.5rem; text-align: center; }
+        .demo-arrow .label { font-size: 0.75rem; font-weight: 600; }
+        .demo-stats { display: flex; justify-content: space-around; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #334155; }
+        .demo-stat-value { color: #22c55e; font-size: 1.25rem; font-weight: 700; }
+        .demo-stat-label { color: #94a3b8; font-size: 0.75rem; margin-top: 0.25rem; }
+        .cta-section { margin-top: 3rem; }
+        .cta-section h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .cta-section p { color: var(--text-light); margin-bottom: 2rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
         .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 14px rgba(37,99,235,0.4); }
         .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
-        .btn-secondary { background: var(--bg); color: var(--text); border: 2px solid var(--border); }
+        .btn-secondary { background: white; color: var(--text); border: 2px solid var(--border); margin-left: 1rem; }
         .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-        
-        .results-panel { background: linear-gradient(135deg, var(--bg-light), var(--bg)); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; }
-        .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
-        .result-item { padding: 1rem; }
-        .result-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .result-label { color: var(--text-light); font-size: 0.875rem; margin-top: 0.5rem; }
-        .result-value.success { background: linear-gradient(135deg, var(--success), #16a34a); -webkit-background-clip: text; }
-        
-        .savings-calculator { background: var(--bg-light); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; }
-        .savings-calculator h3 { margin-bottom: 1.5rem; }
-        .input-group { margin-bottom: 1rem; }
-        .input-group label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
-        .input-group input { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; }
-        .savings-result { background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(22,163,74,0.1)); border-left: 4px solid var(--success); padding: 1.5rem; border-radius: 0 8px 8px 0; margin-top: 1.5rem; }
-        .savings-result h4 { color: var(--success); margin-bottom: 0.5rem; }
-        .savings-result p { margin: 0; color: var(--text); }
-        
-        .examples { margin-top: 3rem; }
-        .examples h3 { margin-bottom: 1rem; }
-        .example-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-        .example-tab { padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-size: 0.875rem; transition: all 0.2s; }
-        .example-tab:hover { border-color: var(--primary); }
-        .example-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
-        
-        .copy-btn { position: absolute; top: 1rem; right: 1rem; background: var(--bg); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.875rem; transition: all 0.2s; }
-        .copy-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
-        .copy-btn.copied { background: var(--success); color: white; border-color: var(--success); }
-        .output-wrapper { position: relative; }
-        
-        footer { background: #0f172a; color: #94a3b8; padding: 3rem 2rem 2rem; margin-top: 4rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 3rem; }
-        .footer-brand .logo { color: white; margin-bottom: 1rem; }
-        .footer-brand p { font-size: 0.875rem; line-height: 1.6; }
-        .footer-links h4 { color: white; font-size: 0.875rem; margin-bottom: 1rem; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.5rem; }
-        .footer-links a { color: #94a3b8; text-decoration: none; font-size: 0.875rem; }
-        .footer-links a:hover { color: white; }
-        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid #1e293b; text-align: center; font-size: 0.875rem; }
-        
-        @media (max-width: 768px) {
-            .playground-grid { grid-template-columns: 1fr; }
-            .results-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
-        }
+        .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; text-align: left; }
+        .benefit { background: var(--bg-light); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .benefit h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .benefit p { color: var(--text-light); font-size: 0.875rem; }
+        footer { background: #0f172a; color: #94a3b8; padding: 3rem 2rem; text-align: center; margin-top: 4rem; font-size: 0.875rem; }
+        @media (max-width: 768px) { .demo-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html" class="logo"><div class="logo-icon">PM</div>Blueprint Labs</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="docs.html">Docs</a></li>
-                <li><a href="playground.html">Playground</a></li>
-                <li><a href="index.html#pricing">Pricing</a></li>
-                <li><a href="signup.html" class="nav-cta">Get API Key</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="playground-container">
-        <div class="playground-header">
-            <h1>Try PMI Compression</h1>
-            <p>Paste your prompt below and see how much you can save on AI API costs.</p>
-        </div>
-
-        <div class="examples">
-            <h3>Example Prompts</h3>
-            <div class="example-tabs">
-                <button class="example-tab active" onclick="loadExample('sales')">Sales Analysis</button>
-                <button class="example-tab" onclick="loadExample('code')">Code Review</button>
-                <button class="example-tab" onclick="loadExample('email')">Email Draft</button>
-                <button class="example-tab" onclick="loadExample('research')">Research</button>
+    <header><nav>
+        <a href="index.html" class="logo"><div class="logo-icon">LF</div>Blueprint Labs</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="signup.html" class="nav-cta">Get Started</a></li>
+        </ul>
+    </nav></header>
+    <div class="content">
+        <h1>See Leanference in Action</h1>
+        <p>Here is a preview of what Leanference can do. Sign up for a free account to access the full interactive playground.</p>
+        <div class="demo-preview">
+            <div class="demo-header">
+                <div class="demo-dot red"></div><div class="demo-dot yellow"></div><div class="demo-dot green"></div>
+                <span style="color: #64748b; margin-left: 1rem; font-size: 0.875rem;">leanference-playground</span>
             </div>
-        </div>
-
-        <div class="playground-grid">
-            <div class="panel">
-                <div class="panel-header">
-                    <h3>Original Prompt</h3>
-                    <div class="stats">
-                        <span id="original-chars">0 chars</span>
-                        <span id="original-tokens">0 tokens</span>
+            <div class="demo-body">
+                <div class="demo-row">
+                    <div class="demo-panel">
+                        <h4>Original Prompt (87 tokens)</h4>
+                        <div class="demo-text">I need you to analyze this quarterly sales report and provide a comprehensive breakdown of the performance metrics. Please look at the revenue figures, compare them to last quarter, identify any trends or patterns, and suggest three specific actionable recommendations.</div>
+                    </div>
+                    <div class="demo-arrow">&#x2192;<div class="label">-47%</div></div>
+                    <div class="demo-panel">
+                        <h4>Optimized (46 tokens)</h4>
+                        <div class="demo-text">Analyze Q sales report: rev figs, QoQ compare, trends, 3 actionable recs w/ nums/%</div>
                     </div>
                 </div>
-                <div class="panel-body">
-                    <textarea id="input-prompt" placeholder="Paste your prompt here..."></textarea>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="panel-header">
-                    <h3>Compressed Prompt</h3>
-                    <div class="stats">
-                        <span id="compressed-chars">0 chars</span>
-                        <span id="compressed-tokens">0 tokens</span>
-                    </div>
-                </div>
-                <div class="panel-body output-wrapper">
-                    <div id="output-prompt" class="output-area">Your compressed prompt will appear here...</div>
-                    <button class="copy-btn" onclick="copyOutput()">Copy</button>
+                <div class="demo-stats">
+                    <div class="demo-stat"><div class="demo-stat-value">47%</div><div class="demo-stat-label">Reduction</div></div>
+                    <div class="demo-stat"><div class="demo-stat-value">97.2%</div><div class="demo-stat-label">Quality</div></div>
+                    <div class="demo-stat"><div class="demo-stat-value">1.2ms</div><div class="demo-stat-label">Speed</div></div>
+                    <div class="demo-stat"><div class="demo-stat-value">$0.12</div><div class="demo-stat-label">Saved/call</div></div>
                 </div>
             </div>
         </div>
-
-        <div class="controls">
-            <button class="btn btn-primary" id="compress-btn" onclick="compressPrompt()">
-                <span>⚡ Compress Prompt</span>
-            </button>
-            <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
-        </div>
-
-        <div class="results-panel" id="results-panel" style="display: none;">
-            <div class="results-grid">
-                <div class="result-item">
-                    <div class="result-value success" id="result-compression">0%</div>
-                    <div class="result-label">Compression</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-value" id="result-saved">0</div>
-                    <div class="result-label">Tokens Saved</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-value" id="result-quality">0%</div>
-                    <div class="result-label">Quality Score</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-value" id="result-time">0ms</div>
-                    <div class="result-label">Processing Time</div>
-                </div>
+        <div class="cta-section">
+            <h2>Ready to try it yourself?</h2>
+            <p>Create a free account to access the interactive playground with your own prompts. The Starter plan includes 1,000 requests per month at no cost.</p>
+            <div>
+                <a href="signup.html" class="btn btn-primary">Create Free Account</a>
+                <a href="index.html#pricing" class="btn btn-secondary">View Pricing</a>
             </div>
         </div>
-
-        <div class="savings-calculator">
-            <h3>💰 Calculate Your Savings</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                <div class="input-group">
-                    <label>Monthly API Calls</label>
-                    <input type="number" id="monthly-calls" value="10000" onchange="calculateSavings()">
-                </div>
-                <div class="input-group">
-                    <label>Avg Tokens per Call</label>
-                    <input type="number" id="avg-tokens" value="2000" onchange="calculateSavings()">
-                </div>
-                <div class="input-group">
-                    <label>Cost per 1K Tokens ($)</label>
-                    <input type="number" id="cost-per-1k" value="0.03" step="0.001" onchange="calculateSavings()">
-                </div>
-            </div>
-            <div class="savings-result">
-                <h4>Estimated Monthly Savings</h4>
-                <p id="savings-amount">$450/month</p>
-                <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-light);">Based on 49.8% average compression</p>
-            </div>
+        <div class="benefits">
+            <div class="benefit"><h3>40-60% Cost Savings</h3><p>Most users see significant reductions in their AI API spend from day one.</p></div>
+            <div class="benefit"><h3>96.5% Quality</h3><p>Optimized prompts maintain near-identical output quality.</p></div>
+            <div class="benefit"><h3>1.43ms Processing</h3><p>Near-instant optimization that does not slow down your workflows.</p></div>
+            <div class="benefit"><h3>Works Everywhere</h3><p>Compatible with OpenAI, Anthropic, Google, and all major providers.</p></div>
         </div>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="index.html" class="logo"><div class="logo-icon">PM</div>Blueprint Labs</a>
-                <p>Cut AI API costs by 45% with intelligent prompt compression. Enterprise-grade reliability with 1.43ms processing time.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="index.html#features">Features</a></li>
-                    <li><a href="playground.html">Playground</a></li>
-                    <li><a href="docs.html">Documentation</a></li>
-                    <li><a href="index.html#pricing">Pricing</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="docs.html">API Docs</a></li>
-                    <li><a href="#">Status</a></li>
-                    <li><a href="#">Changelog</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Blueprint Labs. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        const examples = {
-            sales: `I need you to analyze this quarterly sales report and provide a comprehensive breakdown of the performance metrics. Please look at the revenue figures, compare them to last quarter, identify any trends or patterns, and suggest three specific actionable recommendations for improving sales in the next quarter. Make sure to include specific numbers and percentages where relevant.`,
-            
-            code: `Can you please review this Python function and help me identify any potential bugs, performance issues, or areas where the code could be improved? I'm particularly concerned about error handling and whether the function will work correctly with edge cases. Please provide specific suggestions for refactoring and explain why each change would be beneficial.`,
-            
-            email: `I need to write a professional email to a potential client who expressed interest in our services last week. I want to follow up, provide more information about what we offer, and suggest scheduling a call to discuss their specific needs. The tone should be friendly but professional, and I want to make sure I don't sound too pushy or salesy.`,
-            
-            research: `I'm researching the impact of artificial intelligence on the healthcare industry and I need you to help me understand the current state of AI adoption in hospitals and clinics. Please provide an overview of the main applications, the benefits and challenges, and any recent statistics or studies that would be relevant. I'm particularly interested in diagnostic imaging and patient care optimization.`
-        };
-
-        function loadExample(type) {
-            document.getElementById('input-prompt').value = examples[type];
-            document.querySelectorAll('.example-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            updateStats();
-        }
-
-        function updateStats() {
-            const text = document.getElementById('input-prompt').value;
-            const chars = text.length;
-            const tokens = Math.ceil(chars / 4); // Rough estimate
-            document.getElementById('original-chars').textContent = chars + ' chars';
-            document.getElementById('original-tokens').textContent = tokens + ' tokens';
-        }
-
-        function compressPrompt() {
-            const input = document.getElementById('input-prompt').value;
-            if (!input.trim()) {
-                alert('Please enter a prompt to compress');
-                return;
-            }
-
-            const btn = document.getElementById('compress-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<span>⏳ Compressing...</span>';
-
-            // Simulate compression (in production, this would call the API)
-            setTimeout(() => {
-                const compressed = simulateCompression(input);
-                document.getElementById('output-prompt').textContent = compressed;
-                
-                const originalTokens = Math.ceil(input.length / 4);
-                const compressedTokens = Math.ceil(compressed.length / 4);
-                const saved = originalTokens - compressedTokens;
-                const compression = Math.round((saved / originalTokens) * 100);
-                
-                document.getElementById('compressed-chars').textContent = compressed.length + ' chars';
-                document.getElementById('compressed-tokens').textContent = compressedTokens + ' tokens';
-                
-                document.getElementById('result-compression').textContent = compression + '%';
-                document.getElementById('result-saved').textContent = saved;
-                document.getElementById('result-quality').textContent = (95 + Math.random() * 4).toFixed(1) + '%';
-                document.getElementById('result-time').textContent = (1 + Math.random()).toFixed(2) + 'ms';
-                
-                document.getElementById('results-panel').style.display = 'block';
-                
-                btn.disabled = false;
-                btn.innerHTML = '<span>⚡ Compress Prompt</span>';
-            }, 800);
-        }
-
-        // Real PMI Compression Algorithm
-        const STOP_WORDS = new Set(['a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they']);
-        
-        const ABBREVIATIONS = {
-            'please': '', 'thanks': 'thx', 'thank you': 'ty', 'information': 'info',
-            'application': 'app', 'approximately': '~', 'example': 'ex', 'versus': 'vs',
-            'artificial intelligence': 'AI', 'machine learning': 'ML'
-        };
-        
-        const REDUNDANT_PATTERNS = [
-            { pattern: /\bin order to\b/gi, replacement: 'to' },
-            { pattern: /\bdue to the fact that\b/gi, replacement: 'because' },
-            { pattern: /\bin the event that\b/gi, replacement: 'if' },
-            { pattern: /\bat this point in time\b/gi, replacement: 'now' },
-            { pattern: /\bfor the purpose of\b/gi, replacement: 'for' },
-            { pattern: /\bit is important to note that\b/gi, replacement: '' },
-            { pattern: /\bit should be noted that\b/gi, replacement: '' },
-            { pattern: /\bneedless to say\b/gi, replacement: '' },
-            { pattern: /\bto be honest\b/gi, replacement: '' },
-            { pattern: /\bat the end of the day\b/gi, replacement: 'ultimately' },
-            { pattern: /\bI would like to\b/gi, replacement: '' },
-            { pattern: /\bI need you to\b/gi, replacement: '' },
-            { pattern: /\bCan you please\b/gi, replacement: '' },
-            { pattern: /\bCould you please\b/gi, replacement: '' }
-        ];
-        
-        function simulateCompression(text) {
-            let result = text;
-            
-            // Step 1: Remove redundant phrases
-            REDUNDANT_PATTERNS.forEach(({ pattern, replacement }) => {
-                result = result.replace(pattern, replacement);
-            });
-            
-            // Step 2: Apply abbreviations
-            Object.entries(ABBREVIATIONS).forEach(([full, abbr]) => {
-                result = result.replace(new RegExp('\\b' + full + '\\b', 'gi'), abbr);
-            });
-            
-            // Step 3: Remove filler words at start
-            result = result.replace(/^(I need|I want|Can you|Could you|Please|Kindly)\s+/gi, '');
-            
-            // Step 4: Simplify common phrases
-            result = result
-                .replace(/\bprovide me with\b/gi, 'give me')
-                .replace(/\bgive me a\b/gi, 'give')
-                .replace(/\bmake sure to\b/gi, '')
-                .replace(/\btry to\b/gi, '')
-                .replace(/\battempt to\b/gi, '')
-                .replace(/\bmanage to\b/gi, '')
-                .replace(/\bsucceed in\b/gi, '')
-                .replace(/\bcomprehensive\b/gi, '')
-                .replace(/\bdetailed\b/gi, '')
-                .replace(/\bthorough\b/gi, '')
-                .replace(/\bspecific\b/gi, '')
-                .replace(/\bparticular\b/gi, '')
-                .replace(/\bexact\b/gi, '')
-                .replace(/\bprecise\b/gi, '');
-            
-            // Step 5: Remove articles where safe
-            result = result
-                .replace(/\bthe\s+/gi, ' ')
-                .replace(/\ba\s+/gi, ' ')
-                .replace(/\ban\s+/gi, ' ');
-            
-            // Step 6: Normalize whitespace
-            result = result.replace(/\s+/g, ' ').trim();
-            
-            // Step 7: Shorten sentences (remove "and" between clauses)
-            result = result.replace(/,\s*and\s+/gi, ', ');
-            
-            // Step 8: Convert to imperative where possible
-            result = result
-                .replace(/\bI would like\b/gi, '')
-                .replace(/\bI want\b/gi, '')
-                .replace(/\bI need\b/gi, '');
-            
-            return result.trim();
-        }
-
-        function clearAll() {
-            document.getElementById('input-prompt').value = '';
-            document.getElementById('output-prompt').textContent = 'Your compressed prompt will appear here...';
-            document.getElementById('results-panel').style.display = 'none';
-            updateStats();
-        }
-
-        function copyOutput() {
-            const output = document.getElementById('output-prompt').textContent;
-            navigator.clipboard.writeText(output).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = 'Copy';
-                    btn.classList.remove('copied');
-                }, 2000);
-            });
-        }
-
-        function calculateSavings() {
-            const calls = parseInt(document.getElementById('monthly-calls').value) || 0;
-            const tokens = parseInt(document.getElementById('avg-tokens').value) || 0;
-            const costPer1k = parseFloat(document.getElementById('cost-per-1k').value) || 0;
-            
-            const monthlyTokens = calls * tokens;
-            const monthlyCost = (monthlyTokens / 1000) * costPer1k;
-            const savings = monthlyCost * 0.498; // 49.8% compression
-            
-            document.getElementById('savings-amount').textContent = '$' + savings.toFixed(0) + '/month';
-        }
-
-        document.getElementById('input-prompt').addEventListener('input', updateStats);
-        
-        // Load default example
-        document.getElementById('input-prompt').value = examples.sales;
-        updateStats();
-    </script>
+    <footer><p>&copy; 2025 Blueprint Labs. All rights reserved.</p></footer>
 </body>
 </html>

@@ -3,143 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMI Compression - Working Demo</title>
+    <title>Leanference Playground | Blueprint Labs</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 50px auto; padding: 20px; background: #f8fafc; }
-        h1 { color: #2563eb; }
-        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        textarea { width: 100%; min-height: 120px; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-family: inherit; resize: vertical; }
-        textarea:focus { outline: none; border-color: #2563eb; }
-        button { background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; }
-        button:hover { background: #1d4ed8; }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
-        .results { margin-top: 25px; padding: 20px; background: #f1f5f9; border-radius: 8px; display: none; }
-        .results.show { display: block; }
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
-        .stat { text-align: center; }
-        .stat-value { font-size: 28px; font-weight: 800; color: #2563eb; }
-        .stat-label { font-size: 12px; color: #64748b; margin-top: 5px; }
-        .output-box { background: #0f172a; color: #e2e8f0; padding: 15px; border-radius: 8px; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; }
-        .error { color: #ef4444; margin-top: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --secondary: #0ea5e9; --text: #1e293b; --text-light: #64748b; --bg: #ffffff; --bg-light: #f8fafc; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); }
+        header { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; }
+        nav { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 500; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta { background: var(--primary); color: white !important; padding: 0.5rem 1.25rem; border-radius: 6px; }
+        .content { max-width: 900px; margin: 0 auto; padding: 8rem 2rem 4rem; text-align: center; }
+        .content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .content > p { color: var(--text-light); font-size: 1.125rem; margin-bottom: 3rem; }
+        .demo-preview { background: #1e293b; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); margin-bottom: 3rem; }
+        .demo-header { background: #0f172a; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .demo-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .demo-dot.red { background: #ef4444; } .demo-dot.yellow { background: #f59e0b; } .demo-dot.green { background: #22c55e; }
+        .demo-body { padding: 2rem; }
+        .demo-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; }
+        .demo-panel { background: #0f172a; border-radius: 8px; padding: 1.5rem; text-align: left; }
+        .demo-panel h4 { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .demo-text { color: #e2e8f0; font-size: 0.875rem; line-height: 1.6; font-family: Monaco, Menlo, monospace; }
+        .demo-arrow { color: #22c55e; font-size: 1.5rem; text-align: center; }
+        .demo-arrow .label { font-size: 0.75rem; font-weight: 600; }
+        .demo-stats { display: flex; justify-content: space-around; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #334155; }
+        .demo-stat-value { color: #22c55e; font-size: 1.25rem; font-weight: 700; }
+        .demo-stat-label { color: #94a3b8; font-size: 0.75rem; margin-top: 0.25rem; }
+        .cta-section { margin-top: 3rem; }
+        .cta-section h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .cta-section p { color: var(--text-light); margin-bottom: 2rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 14px rgba(37,99,235,0.4); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary { background: white; color: var(--text); border: 2px solid var(--border); margin-left: 1rem; }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+        .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; text-align: left; }
+        .benefit { background: var(--bg-light); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .benefit h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .benefit p { color: var(--text-light); font-size: 0.875rem; }
+        footer { background: #0f172a; color: #94a3b8; padding: 3rem 2rem; text-align: center; margin-top: 4rem; font-size: 0.875rem; }
+        @media (max-width: 768px) { .demo-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🗜️ PMI Compression Demo</h1>
-        <p>Enter a prompt below and see how PMI compresses it while preserving meaning.</p>
-        
-        <textarea id="input" placeholder="Enter your prompt here...">I need you to analyze this quarterly sales report and provide a comprehensive breakdown of the performance metrics. Please look at the revenue figures, compare them to last quarter, identify any trends or patterns, and suggest three specific actionable recommendations for improving sales in the next quarter.</textarea>
-        
-        <button onclick="compress()" id="btn">⚡ Compress Prompt</button>
-        <div id="error" class="error"></div>
-        
-        <div id="results" class="results">
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-value" id="orig-tokens">0</div>
-                    <div class="stat-label">Original Tokens</div>
+    <header><nav>
+        <a href="index.html" class="logo"><div class="logo-icon">LF</div>Blueprint Labs</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="signup.html" class="nav-cta">Get Started</a></li>
+        </ul>
+    </nav></header>
+    <div class="content">
+        <h1>See Leanference in Action</h1>
+        <p>Here is a preview of what Leanference can do. Sign up for a free account to access the full interactive playground.</p>
+        <div class="demo-preview">
+            <div class="demo-header">
+                <div class="demo-dot red"></div><div class="demo-dot yellow"></div><div class="demo-dot green"></div>
+                <span style="color: #64748b; margin-left: 1rem; font-size: 0.875rem;">leanference-playground</span>
+            </div>
+            <div class="demo-body">
+                <div class="demo-row">
+                    <div class="demo-panel">
+                        <h4>Original Prompt (87 tokens)</h4>
+                        <div class="demo-text">I need you to analyze this quarterly sales report and provide a comprehensive breakdown of the performance metrics. Please look at the revenue figures, compare them to last quarter, identify any trends or patterns, and suggest three specific actionable recommendations.</div>
+                    </div>
+                    <div class="demo-arrow">&#x2192;<div class="label">-47%</div></div>
+                    <div class="demo-panel">
+                        <h4>Optimized (46 tokens)</h4>
+                        <div class="demo-text">Analyze Q sales report: rev figs, QoQ compare, trends, 3 actionable recs w/ nums/%</div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <div class="stat-value" id="comp-tokens">0</div>
-                    <div class="stat-label">Compressed Tokens</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value" id="saved">0</div>
-                    <div class="stat-label">Tokens Saved</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value" id="ratio">0%</div>
-                    <div class="stat-label">Compression</div>
+                <div class="demo-stats">
+                    <div class="demo-stat"><div class="demo-stat-value">47%</div><div class="demo-stat-label">Reduction</div></div>
+                    <div class="demo-stat"><div class="demo-stat-value">97.2%</div><div class="demo-stat-label">Quality</div></div>
+                    <div class="demo-stat"><div class="demo-stat-value">1.2ms</div><div class="demo-stat-label">Speed</div></div>
+                    <div class="demo-stat"><div class="demo-stat-value">$0.12</div><div class="demo-stat-label">Saved/call</div></div>
                 </div>
             </div>
-            
-            <h3>Compressed Result:</h3>
-            <div class="output-box" id="output"></div>
+        </div>
+        <div class="cta-section">
+            <h2>Ready to try it yourself?</h2>
+            <p>Create a free account to access the interactive playground with your own prompts. The Starter plan includes 1,000 requests per month at no cost.</p>
+            <div>
+                <a href="signup.html" class="btn btn-primary">Create Free Account</a>
+                <a href="index.html#pricing" class="btn btn-secondary">View Pricing</a>
+            </div>
+        </div>
+        <div class="benefits">
+            <div class="benefit"><h3>40-60% Cost Savings</h3><p>Most users see significant reductions in their AI API spend from day one.</p></div>
+            <div class="benefit"><h3>96.5% Quality</h3><p>Optimized prompts maintain near-identical output quality.</p></div>
+            <div class="benefit"><h3>1.43ms Processing</h3><p>Near-instant optimization that does not slow down your workflows.</p></div>
+            <div class="benefit"><h3>Works Everywhere</h3><p>Compatible with OpenAI, Anthropic, Google, and all major providers.</p></div>
         </div>
     </div>
-
-    <script>
-        // PMI Compression Algorithm
-        function compress() {
-            const btn = document.getElementById('btn');
-            const errorDiv = document.getElementById('error');
-            const input = document.getElementById('input').value;
-            
-            errorDiv.textContent = '';
-            
-            if (!input.trim()) {
-                errorDiv.textContent = 'Please enter a prompt to compress';
-                return;
-            }
-            
-            btn.disabled = true;
-            btn.textContent = '⏳ Compressing...';
-            
-            try {
-                // Run compression
-                const compressed = pmiCompress(input);
-                
-                // Calculate stats
-                const originalTokens = Math.ceil(input.length / 4);
-                const compressedTokens = Math.ceil(compressed.length / 4);
-                const saved = originalTokens - compressedTokens;
-                const ratio = Math.round((saved / originalTokens) * 100);
-                
-                // Display results
-                document.getElementById('orig-tokens').textContent = originalTokens;
-                document.getElementById('comp-tokens').textContent = compressedTokens;
-                document.getElementById('saved').textContent = saved;
-                document.getElementById('ratio').textContent = ratio + '%';
-                document.getElementById('output').textContent = compressed;
-                document.getElementById('results').classList.add('show');
-                
-            } catch (e) {
-                errorDiv.textContent = 'Error: ' + e.message;
-                console.error(e);
-            }
-            
-            btn.disabled = false;
-            btn.textContent = '⚡ Compress Prompt';
-        }
-        
-        function pmiCompress(text) {
-            let result = text;
-            
-            // Pattern replacements
-            const patterns = [
-                [/\bI need you to\b/gi, ''],
-                [/\bCan you please\b/gi, ''],
-                [/\bCould you please\b/gi, ''],
-                [/\bI would like to\b/gi, ''],
-                [/\bI want to\b/gi, ''],
-                [/\bin order to\b/gi, 'to'],
-                [/\bdue to the fact that\b/gi, 'because'],
-                [/\bin the event that\b/gi, 'if'],
-                [/\bat this point in time\b/gi, 'now'],
-                [/\bfor the purpose of\b/gi, 'for'],
-                [/\bit is important to note that\b/gi, ''],
-                [/\bplease\b/gi, ''],
-                [/\bcomprehensive\b/gi, ''],
-                [/\bdetailed\b/gi, ''],
-                [/\bthorough\b/gi, ''],
-                [/\bspecific\b/gi, ''],
-                [/\bthe\b/gi, ''],
-                [/\ba\b/gi, ''],
-                [/\ban\b/gi, '']
-            ];
-            
-            patterns.forEach(([pattern, replacement]) => {
-                result = result.replace(pattern, replacement);
-            });
-            
-            // Clean up whitespace
-            result = result.replace(/\s+/g, ' ').trim();
-            
-            // Remove leading/trailing punctuation
-            result = result.replace(/^[\s,]+|[\s,]+$/g, '');
-            
-            return result;
-        }
-    </script>
+    <footer><p>&copy; 2025 Blueprint Labs. All rights reserved.</p></footer>
 </body>
 </html>
