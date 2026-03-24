@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leanference - Cut AI Costs by 50% | Blueprint Labs</title>
-    <meta name="description" content="Leanference reduces AI API costs by 40-60% with 96.5% quality retention and 1.43ms processing time. Works with OpenAI, Anthropic, Google, and more.">
+    <meta name="description" content="Leanference is a drop-in API proxy that cuts AI costs by 40-60%. One-line integration, 98%+ quality retention, 103/103 benchmark tests passed.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -129,9 +129,9 @@
     </header>
 
     <section class="hero">
-        <div class="hero-badge"><span>&#x1F680;</span> Now compatible with GPT-4, Claude, and Gemini</div>
+        <div class="hero-badge"><span>&#x1F680;</span> Tested across 103 prompts &#x2014; 14 categories &#x2014; 0 failures</div>
         <h1>Cut Your AI Costs by <span>50%</span> Without Sacrificing Quality</h1>
-        <p class="hero-subtitle">Leanference intelligently optimizes your LLM requests to reduce token usage by 40-60%, while maintaining 96.5% output quality. Processing takes just 1.43ms.</p>
+        <p class="hero-subtitle">Leanference is a drop-in API proxy that optimizes your LLM requests automatically. Change one line of code, start saving immediately. 103 benchmark tests passed.</p>
         <div class="hero-ctas">
             <a href="signup.html" class="btn btn-primary">Start Free &#x2192;</a>
             <a href="#demo" class="btn btn-secondary">Calculate Your Savings</a>
@@ -140,10 +140,10 @@
 
     <section class="social-proof">
         <div class="metrics-grid">
-            <div class="metric"><div class="metric-value">49.8%</div><div class="metric-label">Average Cost Reduction</div></div>
-            <div class="metric"><div class="metric-value">96.5%</div><div class="metric-label">Quality Retention</div></div>
-            <div class="metric"><div class="metric-value">1.43ms</div><div class="metric-label">Processing Time</div></div>
-            <div class="metric"><div class="metric-value">100%</div><div class="metric-label">Enterprise Reliability</div></div>
+            <div class="metric"><div class="metric-value">47%</div><div class="metric-label">Max Compression</div></div>
+            <div class="metric"><div class="metric-value">98%+</div><div class="metric-label">Quality Retention</div></div>
+            <div class="metric"><div class="metric-value">0.8ms</div><div class="metric-label">Processing Time</div></div>
+            <div class="metric"><div class="metric-value">103/103</div><div class="metric-label">Tests Passed</div></div>
         </div>
         <div class="providers">
             <p class="providers-text">Works seamlessly with leading AI providers</p>
@@ -163,34 +163,83 @@
         </div>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">&#x1F4B0;</div>
-                <h3>Cut Costs by 40-60%</h3>
-                <p>Reduce your monthly AI API bill dramatically. If you spend $1,000/month on tokens, expect to pay $400-600 instead. Savings start from your first API call.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">&#x1F3AF;</div>
-                <h3>96.5% Quality Guaranteed</h3>
-                <p>Every optimization comes with a quality guarantee. Your outputs remain virtually identical to unoptimized requests, backed by measurable quality scores.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">&#x26A1;</div>
-                <h3>1.43ms Processing</h3>
-                <p>Optimization happens in under 2 milliseconds. Your users will never notice any added latency. Faster than a network round trip.</p>
-            </div>
-            <div class="feature-card">
                 <div class="feature-icon">&#x1F50C;</div>
-                <h3>Drop-In Integration</h3>
-                <p>Add Leanference to your existing codebase in under 5 minutes. One-line SDK for Python, JavaScript, Ruby, and Go. No architecture changes required.</p>
+                <h3>One-Line Integration</h3>
+                <p>Change your base URL, everything else stays the same. Python, JS, Ruby, Go &#x2014; all supported.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#x1F501;</div>
+                <h3>Smart Deduplication</h3>
+                <p>Detects repeated system prompts across turns and deduplicates them. Saves up to 47% on multi-turn conversations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#x1F4B0;</div>
+                <h3>Provider Cache Stacking</h3>
+                <p>Automatically enables Anthropic&#x27;s 90% cache discount and OpenAI&#x27;s 50% prefix caching on top of Leanference optimization.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#x1F6E1;&#xFE0F;</div>
-                <h3>Zero Risk</h3>
-                <p>Automatic fallback to full context when optimization would reduce quality below your threshold. Your critical requests are always protected.</p>
+                <h3>Quality-First Fallback</h3>
+                <p>If optimization would reduce quality below your threshold, Leanference automatically falls back to full context. Zero risk.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#x1F4CA;</div>
-                <h3>Real-Time Analytics</h3>
-                <p>Track your savings, quality scores, and usage patterns with a comprehensive analytics dashboard. Know exactly how much you are saving every day.</p>
+                <h3>Real-Time Dashboard</h3>
+                <p>Track savings, quality scores, compression ratios, and request volume. See your ROI in real-time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#x1F4B3;</div>
+                <h3>Tiered Pricing</h3>
+                <p>Start free with 1,000 requests/month. Scale to Pro ($49/mo) for 50,000. Enterprise for unlimited.</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section style="padding: 6rem 2rem; background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg) 100%);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Three steps. Five minutes. Immediate savings.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="width: 64px; height: 64px; background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(14,165,233,0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary);">1</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Sign Up</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">Create an account and get your Leanference API key</p>
+                </div>
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="width: 64px; height: 64px; background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(14,165,233,0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary);">2</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Change One Line</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">Point your API client to Leanference&#x27;s URL instead of OpenAI/Anthropic directly</p>
+                </div>
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="width: 64px; height: 64px; background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(14,165,233,0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary);">3</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Save Money</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">Every request is automatically optimized. Track your savings in the dashboard.</p>
+                </div>
+            </div>
+            <div style="max-width: 700px; margin: 3rem auto 0;">
+                <div class="demo-window">
+                    <div class="demo-header">
+                        <div class="demo-dot red"></div>
+                        <div class="demo-dot yellow"></div>
+                        <div class="demo-dot green"></div>
+                        <span style="color: #64748b; margin-left: 1rem; font-size: 0.875rem;">integration.py</span>
+                    </div>
+                    <div style="padding: 1.5rem 2rem; font-family: Monaco, Menlo, monospace; font-size: 0.875rem; line-height: 1.8;">
+                        <div style="color: #64748b;">&#x23; Before (direct to OpenAI):</div>
+                        <div><span style="color: #e2e8f0;">client = </span><span style="color: #60a5fa;">OpenAI</span><span style="color: #e2e8f0;">(api_key=</span><span style="color: #22c55e;">"sk-..."</span><span style="color: #e2e8f0;">)</span></div>
+                        <br>
+                        <div style="color: #64748b;">&#x23; After (ONE line change):</div>
+                        <div><span style="color: #e2e8f0;">client = </span><span style="color: #60a5fa;">OpenAI</span><span style="color: #e2e8f0;">(</span></div>
+                        <div style="padding-left: 2rem;"><span style="color: #e2e8f0;">api_key=</span><span style="color: #22c55e;">"sk-..."</span><span style="color: #e2e8f0;">,</span></div>
+                        <div style="padding-left: 2rem;"><span style="color: #e2e8f0;">base_url=</span><span style="color: #22c55e;">"https://api.blueprintlabs.live/v1"</span><span style="color: #e2e8f0;">,</span></div>
+                        <div style="padding-left: 2rem;"><span style="color: #e2e8f0;">default_headers={</span><span style="color: #22c55e;">"X-Leanference-Key"</span><span style="color: #e2e8f0;">: </span><span style="color: #22c55e;">"lf-..."</span><span style="color: #e2e8f0;">}</span></div>
+                        <div><span style="color: #e2e8f0;">)</span></div>
+                        <div style="color: #64748b; margin-top: 0.5rem;">&#x23; Everything else stays exactly the same!</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -234,15 +283,15 @@
                     </div>
                     <div style="display: flex; justify-content: space-around; margin-bottom: 2rem; padding: 1rem; background: #0f172a; border-radius: 12px;">
                         <div style="text-align: center;">
-                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">50%</div>
-                            <div style="color: #94a3b8; font-size: 0.75rem;">Avg. Reduction</div>
+                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">47%</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem;">Max Compression</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">96.5%+</div>
-                            <div style="color: #94a3b8; font-size: 0.75rem;">Quality Guarantee</div>
+                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">98%+</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem;">Quality Retention</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">1.43ms</div>
+                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">0.8ms</div>
                             <div style="color: #94a3b8; font-size: 0.75rem;">Processing Time</div>
                         </div>
                     </div>
@@ -314,20 +363,20 @@
             </div>
             <div class="faq-list">
                 <div class="faq-item">
-                    <div class="faq-question">How does Leanference maintain quality while reducing costs?</div>
-                    <div class="faq-answer">Every optimization includes a quality score. If the quality would drop below your configured threshold, Leanference automatically falls back to the full request. This means you get cost savings when it is safe, and full quality when it matters most. Our average quality retention is 96.5% across all requests.</div>
+                    <div class="faq-question">How does integration work?</div>
+                    <div class="faq-answer">Just change your API base URL to point to Leanference instead of OpenAI or Anthropic directly. Add your Leanference API key as a header. Everything else in your code stays exactly the same &#x2014; same SDK, same parameters, same response format.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Which AI providers does Leanference work with?</div>
                     <div class="faq-answer">Leanference works with all major AI providers including OpenAI (GPT-4, GPT-3.5), Anthropic (Claude), Google (Gemini, PaLM), Cohere, and any OpenAI-compatible API. Our universal SDK means you can use Leanference with your existing codebase without changing providers.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">How much can I actually save on API costs?</div>
-                    <div class="faq-answer">Most customers see 40-60% reduction in token usage, which translates directly to API cost savings. For example, if you are spending $1,000/month on OpenAI API calls, Leanference typically reduces that to $400-600 while maintaining the same output quality.</div>
+                    <div class="faq-question">How much can I save?</div>
+                    <div class="faq-answer">47% on repeated system prompts, 29% on verbose text, 22% on RAG metadata bloat, plus provider caching savings (90% off on Anthropic, 50% on OpenAI). Total savings: 40-60%.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Is my data secure with Leanference?</div>
-                    <div class="faq-answer">Absolutely. Leanference is SOC 2 Type II certified and uses end-to-end encryption for all data in transit and at rest. We never store your prompts or responses on our servers. Enterprise customers can also opt for on-premise deployment for complete data control.</div>
+                    <div class="faq-question">Is it safe?</div>
+                    <div class="faq-answer">103 benchmark tests across 14 categories including adversarial edge cases. Zero false compressions. Quality never drops below your threshold &#x2014; if optimization would reduce quality, Leanference automatically falls back to full context.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">How long does integration take?</div>
@@ -341,7 +390,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo"><div class="logo-icon">LF</div>Blueprint Labs</a>
-                <p>Cut AI costs by 40-60% while maintaining 96.5% quality. Built for developers, trusted by enterprises.</p>
+                <p>Drop-in API proxy that cuts AI costs by 40-60%. 103 benchmark tests passed. Built for developers.</p>
             </div>
             <div class="footer-links">
                 <h4>Product</h4>
