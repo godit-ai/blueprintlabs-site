@@ -134,7 +134,7 @@
         <p class="hero-subtitle">Leanference intelligently optimizes your LLM requests to reduce token usage by 40-60%, while maintaining 96.5% output quality. Processing takes just 1.43ms.</p>
         <div class="hero-ctas">
             <a href="signup.html" class="btn btn-primary">Start Free &#x2192;</a>
-            <a href="#demo" class="btn btn-secondary">See It in Action</a>
+            <a href="#demo" class="btn btn-secondary">Calculate Your Savings</a>
         </div>
     </section>
 
@@ -198,33 +198,56 @@
     <section class="demo" id="demo">
         <div class="demo-container">
             <div class="section-header">
-                <h2>See the Results</h2>
-                <p>Watch Leanference optimize a real prompt, cutting tokens nearly in half while preserving all critical information.</p>
+                <h2>Calculate Your Savings</h2>
+                <p>See how much Leanference can save based on your current AI spend.</p>
             </div>
             <div class="demo-window">
                 <div class="demo-header">
                     <div class="demo-dot red"></div>
                     <div class="demo-dot yellow"></div>
                     <div class="demo-dot green"></div>
-                    <span style="color: #64748b; margin-left: 1rem; font-size: 0.875rem;">leanference-demo.js</span>
+                    <span style="color: #64748b; margin-left: 1rem; font-size: 0.875rem;">savings-calculator</span>
                 </div>
-                <div class="demo-content">
-                    <div class="demo-row">
-                        <div class="demo-panel">
-                            <h4>Original Prompt</h4>
-                            <div class="demo-text"><span class="highlight">const</span> prompt = <span class="highlight">`I need you to analyze this quarterly sales report and provide a comprehensive breakdown of the performance metrics. Please look at the revenue figures, compare them to last quarter, identify any trends or patterns, and suggest three specific actionable recommendations for improving sales in the next quarter. Make sure to include specific numbers and percentages where relevant.`</span>;</div>
+                <div class="demo-content" style="padding: 2.5rem;">
+                    <div style="margin-bottom: 2rem;">
+                        <label for="spendSlider" style="color: #94a3b8; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.75rem;">Your Monthly AI API Spend</label>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                            <span style="color: #64748b; font-size: 0.875rem;">$100</span>
+                            <input type="range" id="spendSlider" min="100" max="50000" value="5000" step="100" style="flex: 1; height: 8px; -webkit-appearance: none; appearance: none; background: linear-gradient(90deg, #2563eb, #0ea5e9); border-radius: 4px; outline: none; cursor: pointer;">
+                            <span style="color: #64748b; font-size: 0.875rem;">$50,000</span>
                         </div>
-                        <div class="demo-arrow">&#x2192;<div class="demo-stats">-47% tokens</div></div>
-                        <div class="demo-panel">
-                            <h4>Leanference Optimized</h4>
-                            <div class="demo-text"><span class="highlight">const</span> compressed = <span class="highlight">`Analyze Q sales report: rev figs, QoQ compare, trends, 3 actionable recs w/ nums/%`</span>;</div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <span style="color: #e2e8f0; font-size: 1rem;">Current spend: </span>
+                            <span id="currentSpend" style="color: #f59e0b; font-size: 1.75rem; font-weight: 800;">$5,000</span>
+                            <span style="color: #64748b; font-size: 0.875rem;"> /month</span>
                         </div>
                     </div>
-                    <div class="demo-result">
-                        <div class="demo-stat"><div class="demo-stat-value">87 &#x2192; 46</div><div>Tokens</div></div>
-                        <div class="demo-stat"><div class="demo-stat-value">47%</div><div>Reduction</div></div>
-                        <div class="demo-stat"><div class="demo-stat-value">97.2%</div><div>Quality</div></div>
-                        <div class="demo-stat"><div class="demo-stat-value">$0.12</div><div>Saved/call</div></div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                        <div style="background: #0f172a; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Monthly Savings</div>
+                            <div id="monthlySavings" style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #22c55e, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">$2,500</div>
+                        </div>
+                        <div style="background: #0f172a; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Annual Savings</div>
+                            <div id="annualSavings" style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #22c55e, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">$30,000</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin-bottom: 2rem; padding: 1rem; background: #0f172a; border-radius: 12px;">
+                        <div style="text-align: center;">
+                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">50%</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem;">Avg. Reduction</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">96.5%+</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem;">Quality Guarantee</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: #22c55e; font-size: 1.25rem; font-weight: 700;">1.43ms</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem;">Processing Time</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="signup.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Start Saving Now &#x2192;</a>
                     </div>
                 </div>
             </div>
@@ -365,6 +388,32 @@
                 if (!isActive) item.classList.add('active');
             });
         });
+        // Savings calculator
+        const slider = document.getElementById('spendSlider');
+        const currentSpendEl = document.getElementById('currentSpend');
+        const monthlySavingsEl = document.getElementById('monthlySavings');
+        const annualSavingsEl = document.getElementById('annualSavings');
+        function formatCurrency(n) {
+            return '$' + n.toLocaleString('en-US');
+        }
+        function updateCalc() {
+            const spend = parseInt(slider.value);
+            const savings = Math.round(spend * 0.5);
+            currentSpendEl.textContent = formatCurrency(spend);
+            monthlySavingsEl.textContent = formatCurrency(savings);
+            annualSavingsEl.textContent = formatCurrency(savings * 12);
+        }
+        slider.addEventListener('input', updateCalc);
     </script>
+    <style>
+        #spendSlider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: white; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 3px solid #2563eb; }
+        #spendSlider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: white; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 3px solid #2563eb; }
+        @media (max-width: 768px) {
+            #monthlySavings, #annualSavings { font-size: 1.75rem !important; }
+        }
+        @media (max-width: 480px) {
+            .demo-content > div:nth-child(2) { grid-template-columns: 1fr !important; }
+        }
+    </style>
 </body>
 </html>

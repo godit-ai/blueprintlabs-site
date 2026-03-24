@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | PMI - Blueprint Labs</title>
-    <meta name="description" content="Manage your PMI API keys, view usage analytics, and monitor your AI cost savings.">
+    <title>Dashboard | Leanference - Blueprint Labs</title>
+    <meta name="description" content="Manage your Leanference API keys, view usage analytics, and monitor your AI cost savings.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #2563eb; --primary-dark: #1d4ed8; --primary-light: #3b82f6;
             --secondary: #0ea5e9; --accent: #06b6d4; --text: #1e293b; --text-light: #64748b;
             --bg: #ffffff; --bg-light: #f8fafc; --bg-dark: #f1f5f9; --border: #e2e8f0;
-            --success: #22c55e; --warning: #f59e0b;
+            --success: #22c55e; --warning: #f59e0b; --error: #ef4444;
         }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg-light); }
-        
+
+        /* Loading overlay while checking auth */
+        .auth-loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-light); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+        .auth-loading.hidden { display: none; }
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         header { background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
         .header-content { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
@@ -22,15 +28,19 @@
         .nav-right { display: flex; align-items: center; gap: 1.5rem; }
         .nav-link { text-decoration: none; color: var(--text-light); font-weight: 500; }
         .nav-link:hover { color: var(--primary); }
-        .user-menu { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background 0.2s; }
-        .user-menu:hover { background: var(--bg-light); }
-        .user-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; }
-        
+        .user-menu { display: flex; align-items: center; gap: 0.75rem; position: relative; }
+        .user-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.875rem; }
+        .user-info { display: flex; flex-direction: column; }
+        .user-name { font-weight: 600; font-size: 0.875rem; }
+        .user-email { font-size: 0.75rem; color: var(--text-light); }
+        .btn-logout { padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--bg); color: var(--text-light); transition: all 0.2s; }
+        .btn-logout:hover { border-color: var(--error); color: var(--error); }
+
         .dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         .dashboard-header { margin-bottom: 2rem; }
         .dashboard-header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
         .dashboard-header p { color: var(--text-light); }
-        
+
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
         .stat-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
         .stat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
@@ -41,13 +51,13 @@
         .stat-value { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
         .stat-change { font-size: 0.875rem; color: var(--text-light); }
         .stat-change.positive { color: var(--success); }
-        
+
         .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
         .panel { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
         .panel-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
         .panel-header h3 { font-size: 1rem; font-weight: 600; }
         .panel-body { padding: 1.5rem; }
-        
+
         .api-key-section { margin-bottom: 1.5rem; }
         .api-key-section:last-child { margin-bottom: 0; }
         .api-key-label { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; }
@@ -59,49 +69,59 @@
         .btn-secondary { background: var(--bg-light); color: var(--text); border: 1px solid var(--border); }
         .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
         .btn-sm { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
-        
+
         .usage-chart { height: 200px; background: var(--bg-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-light); }
-        
+
         .plan-card { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
         .plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
         .plan-name { font-size: 1.25rem; font-weight: 700; }
         .plan-badge { background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 100px; font-size: 0.75rem; }
         .plan-features { list-style: none; margin-bottom: 1.5rem; }
         .plan-features li { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.875rem; }
-        .plan-features li::before { content: '✓'; }
-        
+        .plan-features li::before { content: '\2713'; }
+
         .activity-list { list-style: none; }
         .activity-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
         .activity-item:last-child { border-bottom: none; }
-        .activity-icon { width: 40px; height: 40px; background: var(--bg-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+        .activity-icon { width: 40px; height: 40px; background: var(--bg-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
         .activity-content { flex: 1; }
         .activity-title { font-weight: 500; margin-bottom: 0.25rem; }
         .activity-time { font-size: 0.875rem; color: var(--text-light); }
-        
+
         .quick-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         .action-card { padding: 1.5rem; border: 1px solid var(--border); border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.2s; text-decoration: none; color: var(--text); }
         .action-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(37,99,235,0.1); }
         .action-icon { font-size: 2rem; margin-bottom: 0.75rem; }
         .action-title { font-weight: 600; margin-bottom: 0.25rem; }
         .action-desc { font-size: 0.875rem; color: var(--text-light); }
-        
+
         @media (max-width: 768px) {
             .grid-2 { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .quick-actions { grid-template-columns: 1fr; }
+            .user-info { display: none; }
         }
     </style>
 </head>
 <body>
+    <!-- Auth loading overlay -->
+    <div class="auth-loading" id="auth-loading">
+        <div class="spinner"></div>
+    </div>
+
     <header>
         <div class="header-content">
-            <a href="index.html" class="logo"><div class="logo-icon">PM</div>Blueprint Labs</a>
+            <a href="index.html" class="logo"><div class="logo-icon">LF</div>Blueprint Labs</a>
             <div class="nav-right">
                 <a href="docs.html" class="nav-link">Documentation</a>
                 <a href="playground.html" class="nav-link">Playground</a>
-                <div class="user-menu" onclick="toggleUserMenu()">
-                    <div class="user-avatar">CJ</div>
-                    <span>Clayton</span>
+                <div class="user-menu">
+                    <div class="user-avatar" id="user-avatar">--</div>
+                    <div class="user-info">
+                        <span class="user-name" id="user-name">Loading...</span>
+                        <span class="user-email" id="user-email"></span>
+                    </div>
+                    <button class="btn-logout" onclick="handleLogout()">Sign Out</button>
                 </div>
             </div>
         </div>
@@ -109,7 +129,7 @@
 
     <div class="dashboard">
         <div class="dashboard-header">
-            <h1>Dashboard</h1>
+            <h1 id="greeting">Dashboard</h1>
             <p>Manage your API keys, monitor usage, and track your savings.</p>
         </div>
 
@@ -119,7 +139,7 @@
                     <span class="stat-label">API Calls This Month</span>
                     <span class="stat-badge success">On Track</span>
                 </div>
-                <div class="stat-value">8,432</div>
+                <div class="stat-value">0</div>
                 <div class="stat-change">of 1,000 free limit</div>
             </div>
             <div class="stat-card">
@@ -128,20 +148,20 @@
                     <span class="stat-badge success">Excellent</span>
                 </div>
                 <div class="stat-value">49.8%</div>
-                <div class="stat-change positive">↑ 2.3% from last month</div>
+                <div class="stat-change positive">Baseline</div>
             </div>
             <div class="stat-card">
                 <div class="stat-header">
                     <span class="stat-label">Tokens Saved</span>
                 </div>
-                <div class="stat-value">1.2M</div>
+                <div class="stat-value">0</div>
                 <div class="stat-change">This month</div>
             </div>
             <div class="stat-card">
                 <div class="stat-header">
                     <span class="stat-label">Est. Savings</span>
                 </div>
-                <div class="stat-value">$384</div>
+                <div class="stat-value">$0</div>
                 <div class="stat-change">This month</div>
             </div>
         </div>
@@ -151,13 +171,13 @@
                 <div class="panel" style="margin-bottom: 1.5rem;">
                     <div class="panel-header">
                         <h3>API Keys</h3>
-                        <button class="btn btn-secondary btn-sm" onclick="generateNewKey()">+ New Key</button>
+                        <button class="btn btn-secondary btn-sm" onclick="regenerateKey()">Regenerate</button>
                     </div>
                     <div class="panel-body">
                         <div class="api-key-section">
                             <div class="api-key-label">Production Key</div>
                             <div class="api-key-box">
-                                <input type="password" class="api-key-input" value="pmi_live_abc123xyz789" readonly id="prod-key">
+                                <input type="password" class="api-key-input" value="" readonly id="prod-key">
                                 <button class="btn btn-secondary" onclick="toggleKey('prod-key')">Show</button>
                                 <button class="btn btn-secondary" onclick="copyKey('prod-key')">Copy</button>
                             </div>
@@ -165,7 +185,7 @@
                         <div class="api-key-section">
                             <div class="api-key-label">Test Key</div>
                             <div class="api-key-box">
-                                <input type="password" class="api-key-input" value="pmi_test_def456uvw012" readonly id="test-key">
+                                <input type="password" class="api-key-input" value="" readonly id="test-key">
                                 <button class="btn btn-secondary" onclick="toggleKey('test-key')">Show</button>
                                 <button class="btn btn-secondary" onclick="copyKey('test-key')">Copy</button>
                             </div>
@@ -184,7 +204,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="usage-chart">
-                            📊 Usage chart visualization
+                            Usage chart - data will appear after API calls
                         </div>
                     </div>
                 </div>
@@ -193,7 +213,7 @@
             <div>
                 <div class="plan-card">
                     <div class="plan-header">
-                        <span class="plan-name">Free Plan</span>
+                        <span class="plan-name" id="plan-display">Free Plan</span>
                         <span class="plan-badge">Current</span>
                     </div>
                     <ul class="plan-features">
@@ -207,29 +227,29 @@
 
                 <div class="panel" style="margin-bottom: 1.5rem;">
                     <div class="panel-header">
-                        <h3>Recent Activity</h3>
+                        <h3>Account Info</h3>
                     </div>
                     <div class="panel-body">
                         <ul class="activity-list">
                             <li class="activity-item">
-                                <div class="activity-icon">⚡</div>
+                                <div class="activity-icon">&#9993;</div>
                                 <div class="activity-content">
-                                    <div class="activity-title">API key generated</div>
-                                    <div class="activity-time">2 hours ago</div>
+                                    <div class="activity-title" id="info-email">--</div>
+                                    <div class="activity-time">Email</div>
                                 </div>
                             </li>
                             <li class="activity-item">
-                                <div class="activity-icon">📊</div>
+                                <div class="activity-icon">&#128100;</div>
                                 <div class="activity-content">
-                                    <div class="activity-title">Monthly report ready</div>
-                                    <div class="activity-time">1 day ago</div>
+                                    <div class="activity-title" id="info-uid">--</div>
+                                    <div class="activity-time">User ID</div>
                                 </div>
                             </li>
                             <li class="activity-item">
-                                <div class="activity-icon">🔑</div>
+                                <div class="activity-icon">&#128197;</div>
                                 <div class="activity-content">
-                                    <div class="activity-title">Account created</div>
-                                    <div class="activity-time">3 days ago</div>
+                                    <div class="activity-title" id="info-created">--</div>
+                                    <div class="activity-time">Account created</div>
                                 </div>
                             </li>
                         </ul>
@@ -238,12 +258,12 @@
 
                 <div class="quick-actions">
                     <a href="docs.html" class="action-card">
-                        <div class="action-icon">📚</div>
+                        <div class="action-icon">&#128218;</div>
                         <div class="action-title">View Docs</div>
                         <div class="action-desc">Integration guides</div>
                     </a>
                     <a href="playground.html" class="action-card">
-                        <div class="action-icon">🧪</div>
+                        <div class="action-icon">&#129514;</div>
                         <div class="action-title">Playground</div>
                         <div class="action-desc">Try Leanference</div>
                     </a>
@@ -252,36 +272,100 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="../scripts/firebase-config.js"></script>
+
     <script>
+        // Auth gate: redirect to login if not authenticated
+        auth.onAuthStateChanged(function(user) {
+            var loadingEl = document.getElementById('auth-loading');
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            // User is authenticated - populate dashboard
+            loadingEl.classList.add('hidden');
+            populateDashboard(user);
+        });
+
+        function populateDashboard(user) {
+            var displayName = user.displayName || '';
+            var email = user.email || '';
+            var initials = getInitials(displayName || email);
+
+            // Header
+            document.getElementById('user-avatar').textContent = initials;
+            document.getElementById('user-name').textContent = displayName || email.split('@')[0];
+            document.getElementById('user-email').textContent = email;
+
+            // Greeting
+            var hour = new Date().getHours();
+            var timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+            var firstName = displayName ? displayName.split(' ')[0] : email.split('@')[0];
+            document.getElementById('greeting').textContent = timeGreeting + ', ' + firstName;
+
+            // Account info
+            document.getElementById('info-email').textContent = email;
+            document.getElementById('info-uid').textContent = user.uid.substring(0, 12) + '...';
+            document.getElementById('info-created').textContent = user.metadata.creationTime ? new Date(user.metadata.creationTime).toLocaleDateString() : 'N/A';
+
+            // Generate API keys from UID
+            var prodKey = generateApiKey(user.uid, 'lf_live');
+            var testKey = generateApiKey(user.uid + '_test', 'lf_test');
+            document.getElementById('prod-key').value = prodKey;
+            document.getElementById('test-key').value = testKey;
+
+            // Load plan from localStorage
+            var profile = JSON.parse(localStorage.getItem('lf_user_profile') || '{}');
+            if (profile.plan) {
+                var planNames = { starter: 'Starter (Free)', pro: 'Pro', enterprise: 'Enterprise' };
+                document.getElementById('plan-display').textContent = planNames[profile.plan] || 'Free Plan';
+            }
+        }
+
+        function getInitials(name) {
+            if (!name) return '??';
+            var parts = name.trim().split(/\s+/);
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+            }
+            return name.substring(0, 2).toUpperCase();
+        }
+
         function toggleKey(id) {
-            const input = document.getElementById(id);
+            var input = document.getElementById(id);
             input.type = input.type === 'password' ? 'text' : 'password';
             event.target.textContent = input.type === 'password' ? 'Show' : 'Hide';
         }
-        
+
         function copyKey(id) {
-            const input = document.getElementById(id);
-            navigator.clipboard.writeText(input.value);
-            const btn = event.target;
-            btn.textContent = 'Copied!';
-            setTimeout(() => btn.textContent = 'Copy', 2000);
+            var input = document.getElementById(id);
+            navigator.clipboard.writeText(input.value).then(function() {
+                var btn = event.target;
+                btn.textContent = 'Copied!';
+                setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+            });
         }
-        
-        function generateNewKey() {
-            alert('New API key generation - Coming soon!');
-        }
-        
-        function upgradePlan() {
-            alert('Redirecting to upgrade page...');
-        }
-        
-        function toggleUserMenu() {
-            // User dropdown menu
-            const options = ['Profile', 'Settings', 'Billing', 'Sign Out'];
-            const choice = prompt('Menu options: ' + options.join(', '));
-            if (choice === 'Sign Out') {
-                window.location.href = 'login.html';
+
+        function regenerateKey() {
+            if (confirm('Are you sure you want to regenerate your API keys? Your existing keys will stop working.')) {
+                alert('In a production setup, this would generate new keys via a backend API. For now, keys are derived from your user ID.');
             }
+        }
+
+        function upgradePlan() {
+            alert('Plan upgrade coming soon! Contact sales@blueprintlabs.live for Pro/Enterprise plans.');
+        }
+
+        function handleLogout() {
+            auth.signOut().then(function() {
+                localStorage.removeItem('lf_user_profile');
+                window.location.href = 'login.html';
+            }).catch(function(error) {
+                alert('Error signing out: ' + error.message);
+            });
         }
     </script>
 </body>
